@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.dddskeleton.domain.movie.Movie" table="movies">
+        <composite-id name="id" class="com.dddskeleton.domain.movie.MovieId" access="field">
+            <key-property column="id" name="value" length="36" access="field" />
+        </composite-id>
+
+        <component name="title" class="com.dddskeleton.domain.movie.Title" access="field">
+            <property name="value" column="title" type="string" access="field" />
+        </component>
+
+        <component name="overview" class="com.dddskeleton.domain.movie.Overview" access="field">
+            <property name="value" column="overview" type="string" access="field" />
+        </component>
+        
+		<many-to-one name="director" class="com.dddskeleton.domain.director.Director" fetch="select" access="field" cascade="all">
+            <column name="director_id" not-null="false" />
+        </many-to-one>      
+          
+        <property name="status" column="status" access="field">
+		    <type name="org.hibernate.type.EnumType">
+		      <param name="enumClass">com.dddskeleton.domain.movie.Status</param>
+		      <param name="useNamed">true</param>
+		    </type>       
+		  </property>
+    </class>
+</hibernate-mapping>
