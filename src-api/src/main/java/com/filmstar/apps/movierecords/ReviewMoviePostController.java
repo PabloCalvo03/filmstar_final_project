@@ -23,10 +23,11 @@ public class ReviewMoviePostController {
 	private MovieRepository movieRepository;
 
 	@PostMapping
-	public ResponseEntity<Movie> execute(@PathVariable String id, @RequestBody String comment) throws Exception{
+	public ResponseEntity<SerializedMovie> execute(@PathVariable String id, @RequestBody ReviewMoviePostRequest reviewRequest) throws Exception{
 		Movie movie = movieRepository.findByIdOrFail(new MovieId(id));
-		movie.addReview(new Review(comment));
-		return new ResponseEntity<>(movie, HttpStatus.ACCEPTED);
+		movie.addReview(new Review(reviewRequest.comment));
+		movieRepository.save(movie);
+		return new ResponseEntity<>(SerializedMovie.from(movie), HttpStatus.ACCEPTED);
 	}
 	
 }
