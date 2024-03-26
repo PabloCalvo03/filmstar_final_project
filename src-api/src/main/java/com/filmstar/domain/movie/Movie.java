@@ -2,33 +2,35 @@ package com.filmstar.domain.movie;
 
 import com.filmstar.domain.director.Director;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Movie {
 	
 	private MovieId id;
 	private Title title;
 	private Overview overview;
+
+	private PosterImg posterImg;
 	private Director director;
-	private Set<Review> reviews;
+	private List<Review> reviews;
 	private Status status;
 
 	public Movie() {
-		
+		this.reviews = new ArrayList<Review>();
 	}
 	
-	private Movie(MovieId id, Title title, Overview overview, Director director) {
+	private Movie(MovieId id, Title title, Overview overview, PosterImg posterImg, Director director) {
 		this.id = id;
 		this.title = title;
 		this.overview = overview;
 		this.director = director;
 		this.status = Status.AVAILABLE;
-		this.reviews = new HashSet<Review>();
+		this.reviews = new ArrayList<Review>();
 	}
 	
-	public static Movie register(MovieId id, Title title, Overview overview, Director director) {
-		return new Movie(id, title, overview, director);
+	public static Movie register(MovieId id, Title title, Overview overview, PosterImg posterImg, Director director) {
+		return new Movie(id, title, overview, posterImg, director);
 	}
 	
 	public void addReview(Review review) {
@@ -54,7 +56,7 @@ public class Movie {
 		return director;
 	}
 	
-	public Set<Review> getReviews() {
+	public List<Review> reviews() {
 		return reviews;
 	}
 
@@ -62,7 +64,8 @@ public class Movie {
 		return status;
 	}
 
+	public PosterImg posterImg() {
+		return posterImg;
+	}
 
-	
-	
 }
