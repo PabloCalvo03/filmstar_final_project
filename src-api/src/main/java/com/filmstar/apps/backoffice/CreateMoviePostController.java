@@ -31,7 +31,7 @@ public class CreateMoviePostController {
 	public ResponseEntity<?> execute(@RequestBody CreateMoviePostRequest movieRequest) {
 		try {
 			Movie movie = new AddMovieUseCase(movieRepository, directorRepository).execute(movieRequest.id,
-					movieRequest.title, movieRequest.description, movieRequest.directorId);
+					movieRequest.title, movieRequest.description, movieRequest.posterImg, movieRequest.directorId);
 			return new ResponseEntity<>(SerializedMovie.from(movie), HttpStatus.CREATED);
 		} catch (DirectorNotFound | ValueError e) {
 			return new ResponseEntity<>(Map.of("error", e.getMessage()), HttpStatus.BAD_REQUEST);
