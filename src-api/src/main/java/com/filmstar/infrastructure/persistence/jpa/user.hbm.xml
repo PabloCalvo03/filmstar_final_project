@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="com.filmstar.domain.user">
+    <class name="User" table="users">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="id"/>
+            <generator class="native"/>
+        </id>
+        <component name="email" class="com.filmstar.domain.user.Email" access="field">
+            <property name="value" column="email" type="string" access="field" />
+        </component>
+        <component name="username" class="com.filmstar.domain.user.Username" access="field">
+            <property name="value" column="username" type="string" access="field" />
+        </component>
+        <component name="password" class="com.filmstar.domain.user.Password" access="field">
+            <property name="value" column="password" type="string" access="field" />
+        </component>
+        <property name="role" column="role" access="field">
+		    <type name="org.hibernate.type.EnumType">
+		      <param name="enumClass">com.filmstar.domain.user.Role</param>
+		      <param name="useNamed">true</param>
+		    </type>       
+		  </property>
+    </class>
+</hibernate-mapping>
