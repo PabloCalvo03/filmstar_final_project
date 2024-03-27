@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.filmstar.infrastructure.authentication.UserAuthenticator;
 import com.filmstar.application.shared.ErrorResponse;
-import com.filmstar.application.shared.UserAuthRequest;
 import com.filmstar.application.shared.UserResponse;
 import com.filmstar.domain.user.InvalidAuthUsername;
 import com.filmstar.domain.user.InvalidAuthPassword;
@@ -23,9 +22,9 @@ public class LoginPostController {
 	private UserAuthenticator userAuthenticator;
 	
 	 @PostMapping
-	  public ResponseEntity<?> login(@RequestBody UserAuthRequest userAuthRequest) {
+	  public ResponseEntity<?> login(@RequestBody UserLoginPostRequest userLoginPostRequest) {
 	    try {
-	      final UserResponse userResponse = userAuthenticator.authenticate(userAuthRequest);
+	      final UserResponse userResponse = userAuthenticator.authenticate(userLoginPostRequest);
 	      return ResponseEntity.ok(userResponse);
 	    } catch (InvalidAuthUsername | InvalidAuthPassword e) {
 	      final HttpStatus httpStatus = HttpStatus.UNAUTHORIZED;
