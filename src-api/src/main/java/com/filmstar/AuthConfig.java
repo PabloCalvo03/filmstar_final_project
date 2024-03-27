@@ -10,7 +10,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
-import com.filmstar.application.AuthenticationTokenValidator;
+import com.filmstar.infrastructure.authentication.AuthenticationTokenValidator;
 import com.filmstar.domain.user.Role;
 import com.filmstar.apps.BearerAuthMiddleware;
 
