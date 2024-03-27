@@ -1,6 +1,7 @@
-package com.filmstar.application;
+package com.filmstar.infrastructure.authentication;
 import java.util.Optional;
 
+import com.filmstar.infrastructure.authentication.AuthenticationTokenCreator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
