@@ -1,4 +1,4 @@
-package com.filmstar.config;
+package com.filmstar;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -12,7 +12,7 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 
 import com.filmstar.application.AuthenticationTokenValidator;
 import com.filmstar.domain.user.Role;
-import com.filmstar.middleware.BearerAuthMiddleware;
+import com.filmstar.apps.BearerAuthMiddleware;
 
 @Configuration
 @EnableWebSecurity

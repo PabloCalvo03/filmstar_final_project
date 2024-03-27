@@ -1,4 +1,4 @@
-package com.filmstar.middleware;
+package com.filmstar.apps;
 
 import java.io.IOException;
 import java.util.Collection;
