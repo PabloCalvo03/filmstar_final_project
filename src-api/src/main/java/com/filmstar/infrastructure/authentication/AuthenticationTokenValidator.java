@@ -1,4 +1,4 @@
-package com.filmstar.application;
+package com.filmstar.infrastructure.authentication;
 
 import java.util.Optional;
 
