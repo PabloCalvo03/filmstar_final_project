@@ -1,16 +1,14 @@
-package com.filmstar.application.shared;
+package com.filmstar.apps.shared;
 
-public class UserRegisterRequest {
-    String email;
+public class UserLoginPostRequest {
   String username;
   String password;
   
-  public UserRegisterRequest() {
+  public UserLoginPostRequest() {
 	  
   }
   
-  public UserRegisterRequest(String email, String username, String password) {
-      this.email = email;
+  public UserLoginPostRequest(String username, String password) {
 	  this.username = username;
 	  this.password = password;
   }
@@ -23,8 +21,6 @@ public String getPassword() {
 	return password;
 }
 
-public String getEmail() { return email; }
-
 public void setUsername(String username) {
 	this.username = username;
 }
@@ -32,8 +28,6 @@ public void setUsername(String username) {
 public void setPassword(String password) {
 	this.password = password;
 }
-
-public void setEmail(String email) {
-        this.email = email;
-    }
+  
+  
 }

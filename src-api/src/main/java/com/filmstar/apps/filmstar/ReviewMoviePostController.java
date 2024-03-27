@@ -1,4 +1,4 @@
-package com.filmstar.apps.movierecords;
+package com.filmstar.apps.filmstar;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

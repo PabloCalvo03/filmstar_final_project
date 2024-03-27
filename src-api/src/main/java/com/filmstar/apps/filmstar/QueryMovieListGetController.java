@@ -1,4 +1,4 @@
-package com.filmstar.apps.movierecords;
+package com.filmstar.apps.filmstar;
 
 import java.util.List;
 

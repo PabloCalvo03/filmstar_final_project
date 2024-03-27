@@ -1,13 +1,11 @@
-package com.filmstar.apps.movierecords;
+package com.filmstar.apps.filmstar;
 
 import com.filmstar.apps.backoffice.SerializedDirector;
 import com.filmstar.domain.movie.Movie;
 import com.filmstar.domain.movie.Review;
-import com.filmstar.domain.movie.Status;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
 
 public class SerializedMovie {
 	
