@@ -10,7 +10,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.filter.OncePerRequestFilter;
 
-import com.filmstar.application.AuthenticationTokenValidator;
+import com.filmstar.infrastructure.authentication.AuthenticationTokenValidator;
 import com.filmstar.domain.user.User;
 
 import jakarta.servlet.FilterChain;
