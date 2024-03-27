@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.filmstar.application.UserAuthenticator;
+import com.filmstar.infrastructure.authentication.UserAuthenticator;
 import com.filmstar.application.shared.ErrorResponse;
 import com.filmstar.application.shared.UserAuthRequest;
 import com.filmstar.application.shared.UserResponse;
