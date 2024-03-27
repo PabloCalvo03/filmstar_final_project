@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.filmstar.infrastructure.authentication.UserRegister;
 import com.filmstar.application.shared.ErrorResponse;
-import com.filmstar.application.shared.UserRegisterRequest;
 import com.filmstar.application.shared.UserResponse;
 import com.filmstar.domain.user.UsernameAlreadyExists;
 
@@ -23,9 +22,9 @@ public class SignupPostController {
 	private UserRegister userRegister;
 
 	  @PostMapping
-	  public ResponseEntity<?> register(@RequestBody UserRegisterRequest userRegisterRequest) {
+	  public ResponseEntity<?> register(@RequestBody UserSignupPostRequest userSignupPostRequest) {
 	    try {
-	      final UserResponse userResponse = userRegister.register(userRegisterRequest);
+	      final UserResponse userResponse = userRegister.register(userSignupPostRequest);
 	      return ResponseEntity.ok(userResponse);
 	    } catch (IllegalArgumentException | EmailAlreadyExists | UsernameAlreadyExists e) {
 	      final HttpStatus httpStatus = HttpStatus.CONFLICT;

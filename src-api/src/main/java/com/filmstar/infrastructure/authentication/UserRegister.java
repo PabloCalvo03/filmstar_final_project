@@ -3,11 +3,10 @@ package com.filmstar.infrastructure.authentication;
 import java.util.Optional;
 
 import com.filmstar.domain.user.*;
-import com.filmstar.infrastructure.authentication.AuthenticationTokenCreator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.filmstar.application.shared.UserRegisterRequest;
+import com.filmstar.apps.shared.UserSignupPostRequest;
 import com.filmstar.application.shared.UserResponse;
 
 @Service
@@ -23,19 +22,19 @@ public class UserRegister {
 	  this.passwordEncoder = new BCryptPasswordEncoder();
   }
 
-  public UserResponse register(UserRegisterRequest userRegisterRequest) {
-    String encryptedPassword = passwordEncoder.encode(userRegisterRequest.getPassword());
+  public UserResponse register(UserSignupPostRequest userSignupPostRequest) {
+    String encryptedPassword = passwordEncoder.encode(userSignupPostRequest.getPassword());
 
-    final Optional<User> existingUserByEmail = userRepository.findByEmail(new Email(userRegisterRequest.getEmail()));
-    final Optional<User> existingUserByUsername = userRepository.findByUsername(new Username(userRegisterRequest.getUsername()));
+    final Optional<User> existingUserByEmail = userRepository.findByEmail(new Email(userSignupPostRequest.getEmail()));
+    final Optional<User> existingUserByUsername = userRepository.findByUsername(new Username(userSignupPostRequest.getUsername()));
 
     ensureUserDoesNotExist(existingUserByUsername, existingUserByEmail,
-            new Username(userRegisterRequest.getUsername()),
-            new Email(userRegisterRequest.getEmail()));
+            new Username(userSignupPostRequest.getUsername()),
+            new Email(userSignupPostRequest.getEmail()));
 
     final User newUser = new User(
-            new Email(userRegisterRequest.getEmail()),
-            new Username(userRegisterRequest.getUsername()),
+            new Email(userSignupPostRequest.getEmail()),
+            new Username(userSignupPostRequest.getUsername()),
             new Password(encryptedPassword),
             Role.USER);
 

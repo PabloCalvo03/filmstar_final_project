@@ -1,11 +1,10 @@
 package com.filmstar.infrastructure.authentication;
 import java.util.Optional;
 
-import com.filmstar.infrastructure.authentication.AuthenticationTokenCreator;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.filmstar.application.shared.UserAuthRequest;
+import com.filmstar.apps.shared.UserLoginPostRequest;
 import com.filmstar.application.shared.UserResponse;
 import com.filmstar.domain.user.InvalidAuthPassword;
 import com.filmstar.domain.user.InvalidAuthUsername;
@@ -25,11 +24,11 @@ public class UserAuthenticator {
         this.passwordEncoder = new BCryptPasswordEncoder();
     }
 
-    public UserResponse authenticate(UserAuthRequest userAuthRequest) {
-        final Optional<User> user = userRepository.findByUsername(new Username(userAuthRequest.getUsername()));
+    public UserResponse authenticate(UserLoginPostRequest userLoginPostRequest) {
+        final Optional<User> user = userRepository.findByUsername(new Username(userLoginPostRequest.getUsername()));
 
-        ensureUserExist(user, new Username(userAuthRequest.getUsername()));
-        ensureCredentialsAreValid(user.get(), userAuthRequest.getPassword());
+        ensureUserExist(user, new Username(userLoginPostRequest.getUsername()));
+        ensureCredentialsAreValid(user.get(), userLoginPostRequest.getPassword());
 
         return new UserResponse(
                 user.get().getUsername().value(),
