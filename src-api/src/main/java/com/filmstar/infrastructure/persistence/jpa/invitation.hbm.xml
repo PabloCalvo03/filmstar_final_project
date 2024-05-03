@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="com.filmstar.domain.user.Invitation" table="invitations">
+        <id name="id" type="java.lang.Long" access="field">
+            <column name="id"/>
+            <generator class="native"/>
+        </id>
+
+        <property name="code" type="string" access="field">
+            <column name="code" length="50" not-null="true" unique="true" />
+        </property>
+
+        <property name="expirationDate" type="java.time.LocalDateTime" access="field">
+            <column name="expiration_date" not-null="true" />
+        </property>
+
+        <property name="used" type="boolean" access="field">
+            <column name="used" not-null="true" />
+        </property>
+
+        <many-to-one name="inviter" class="com.filmstar.domain.user.User" fetch="join" access="field">
+            <column name="inviter_id" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

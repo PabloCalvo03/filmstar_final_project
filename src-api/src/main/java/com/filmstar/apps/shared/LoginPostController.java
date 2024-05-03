@@ -3,10 +3,7 @@ package com.filmstar.apps.shared;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.filmstar.infrastructure.authentication.UserAuthenticator;
 import com.filmstar.application.shared.ErrorResponse;
@@ -16,6 +13,7 @@ import com.filmstar.domain.user.InvalidAuthPassword;
 
 @RestController
 @RequestMapping(value = "/api/login")
+@CrossOrigin("*")
 public class LoginPostController {
 	
 	@Autowired

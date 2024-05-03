@@ -1,7 +1,5 @@
 package com.filmstar.domain.user;
 
-import java.util.Set;
-
 public final class User {
 	private Long id;
 	private Email email;
@@ -14,7 +12,7 @@ public final class User {
 	  
   }
   
-  public User(Email email, Username username, Password password, Role role) {
+  public User(Email email, Username username, Password password, Role role) throws IllegalArgumentException{
 	  this.email = email;
 	  this.username = username;
 	  this.password = password;
@@ -25,43 +23,43 @@ public final class User {
     return this.password.value().equals(password.value());
   }
 
-public Long getId() {
+public Long id() {
 	return id;
 }
 
-public Username getUsername() {
+public Username username() {
 	return username;
 }
 
-public Password getPassword() {
+public Password password() {
 	return password;
 }
 
-public Role getRole() {
+public Role role() {
 	return role;
 }
 
-public void setId(Long id) {
+public void id(Long id) {
 	this.id = id;
 }
 
-public void setUsername(Username username) {
+public void username(Username username) {
 	this.username = username;
 }
 
-public void setPassword(Password password) {
+public void password(Password password) {
 	this.password = password;
 }
 
-public void setRole(Role role) {
+public void role(Role role) {
 	this.role = role;
 }
 
-	public Email getEmail() {
+	public Email email() {
 		return email;
 	}
 
-	public void setEmail(Email email) {
+	public void email(Email email) {
 		this.email = email;
 	}
 }

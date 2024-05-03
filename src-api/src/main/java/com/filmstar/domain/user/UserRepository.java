@@ -1,5 +1,7 @@
 package com.filmstar.domain.user;
 
+import com.filmstar.domain.movie.Movie;
+
 import java.util.Optional;
 
 public interface UserRepository {
@@ -7,5 +9,7 @@ public interface UserRepository {
 
   Optional<User> findByEmail(Email email);
 
-  void save(User user);
+    User findByUsernameOrFail(Username id) throws UserNotFound;
+
+    void save(User user);
 }

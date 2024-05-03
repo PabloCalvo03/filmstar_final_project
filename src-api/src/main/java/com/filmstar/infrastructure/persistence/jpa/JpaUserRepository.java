@@ -2,13 +2,10 @@ package com.filmstar.infrastructure.persistence.jpa;
 
 import java.util.Optional;
 
-import com.filmstar.domain.user.Email;
+import com.filmstar.domain.movie.Movie;
+import com.filmstar.domain.user.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-
-import com.filmstar.domain.user.User;
-import com.filmstar.domain.user.UserRepository;
-import com.filmstar.domain.user.Username;
 
 @Repository
 public class JpaUserRepository implements UserRepository{
@@ -24,6 +21,11 @@ public class JpaUserRepository implements UserRepository{
 	@Override
 	public Optional<User> findByEmail(Email email) {
 		return userRepository.findByEmail(email);
+	}
+
+	@Override
+	public User findByUsernameOrFail(Username username) throws UserNotFound {
+		return this.findByUsername(username).orElseThrow(()-> new UserNotFound(username.value()));
 	}
 
 	@Override

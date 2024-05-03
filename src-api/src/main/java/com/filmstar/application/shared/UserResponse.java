@@ -1,33 +1,35 @@
 package com.filmstar.application.shared;
 
-public class UserResponse {
-  String username;
-  String token;
-  
-  public UserResponse() {
-	  
-  }
-  
-  public UserResponse(String username, String token) {
-	  this.username = username;
-	  this.token = token;
-  }
+import java.io.Serializable;
 
-	public String getUsername() {
-		return username;
+public class UserResponse implements Serializable {
+	private String accessToken;
+	private String expirationDate;
+
+	public UserResponse() {
 	}
-	
-	public String getToken() {
-		return token;
+
+	public UserResponse(String accessToken, String expirationDate) {
+		this.accessToken = accessToken;
+		this.expirationDate = expirationDate;
 	}
-	
-	public void setUsername(String username) {
-		this.username = username;
+
+
+	public String getAccessToken() {
+		return accessToken;
 	}
-	
-	public void setToken(String token) {
-		this.token = token;
+
+	public void setAccessToken(String accessToken) {
+		this.accessToken = accessToken;
 	}
-  
-  
+
+	public String getExpirationDate() {
+		return expirationDate;
+	}
+
+	public void setExpirationDate(String expirationDate) {
+		this.expirationDate = expirationDate;
+	}
+
+
 }

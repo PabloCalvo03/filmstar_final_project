@@ -13,6 +13,11 @@ import org.springframework.security.web.authentication.www.BasicAuthenticationFi
 import com.filmstar.infrastructure.authentication.AuthenticationTokenValidator;
 import com.filmstar.domain.user.Role;
 import com.filmstar.apps.BearerAuthMiddleware;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
 
 @Configuration
 @EnableWebSecurity
@@ -24,23 +29,25 @@ public class AuthConfig {
 		this.authenticationTokenValidator = authenticationTokenValidator;
 	}
 
-	  @Bean
-	  public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-	    http.addFilterBefore(
-	            new BearerAuthMiddleware(authenticationTokenValidator), BasicAuthenticationFilter.class)
-	        .csrf(AbstractHttpConfigurer::disable)
-	        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-	        .authorizeHttpRequests(
-	            (requests) ->
-	                requests
-	                    .requestMatchers(HttpMethod.POST, "/api/login", "/api/signup")
-	                    .permitAll()
-	                    .requestMatchers(HttpMethod.GET, "/api/movierecords/movies")
-                        .hasAnyRole(Role.USER.name())
-						.requestMatchers(HttpMethod.GET, "/api/backoffice/movies")
-						.hasAnyRole(Role.ADMIN.name())
-	                    .anyRequest()
-	                    .authenticated());
-	    return http.build();
-	  }
+	@Bean
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http.cors().and()
+				.addFilterBefore(
+						new BearerAuthMiddleware(authenticationTokenValidator),
+						BasicAuthenticationFilter.class)
+				.csrf(AbstractHttpConfigurer::disable)
+				.sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+				.authorizeHttpRequests(
+						(requests) ->
+								requests
+										.requestMatchers(HttpMethod.POST, "/api/login", "/api/signup").permitAll()
+										.requestMatchers(HttpMethod.GET, "/api/movierecords/movies").hasAnyRole(Role.USER.name())
+										.requestMatchers(HttpMethod.GET, "/api/backoffice/movies").hasAnyRole(Role.ADMIN.name())
+										.anyRequest().authenticated());
+		return http.build();
+	}
+
+	
+
 }
+

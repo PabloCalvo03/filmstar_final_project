@@ -48,7 +48,7 @@ public class BearerAuthMiddleware extends OncePerRequestFilter {
 		try {
 			final User user = authenticationTokenValidator.validateToken(authElements[1]);
 	        Collection<SimpleGrantedAuthority> roles =
-					Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.getRole().name()));
+					Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.role().name()));
 
 			final UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
 					user, 

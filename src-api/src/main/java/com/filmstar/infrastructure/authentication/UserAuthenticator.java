@@ -1,4 +1,6 @@
 package com.filmstar.infrastructure.authentication;
+import java.time.Instant;
+import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -30,9 +32,12 @@ public class UserAuthenticator {
         ensureUserExist(user, new Username(userLoginPostRequest.getUsername()));
         ensureCredentialsAreValid(user.get(), userLoginPostRequest.getPassword());
 
+        Instant expirationInstant = Instant.now().plusMillis(3600000);
+        String expirationDate = expirationInstant.toString();
+
         return new UserResponse(
-                user.get().getUsername().value(),
-                authenticationTokenCreator.createToken(user.get().getUsername().value(), user.get().getRole()));
+                authenticationTokenCreator.createToken(user.get().username().value(), user.get().role())
+                        , expirationDate);
     }
 
     private void ensureUserExist(final Optional<User> user, final Username username) {
@@ -43,8 +48,8 @@ public class UserAuthenticator {
 
     private void ensureCredentialsAreValid(final User user, final String password) {
         // Comparar la contraseña proporcionada por el usuario con la contraseña encriptada almacenada en la base de datos
-        if (!passwordEncoder.matches(password, user.getPassword().value())) {
-            throw new InvalidAuthPassword(user.getUsername());
+        if (!passwordEncoder.matches(password, user.password().value())) {
+            throw new InvalidAuthPassword(user.username());
         }
     }
 

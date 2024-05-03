@@ -24,6 +24,7 @@ public class Movie {
 		this.id = id;
 		this.title = title;
 		this.overview = overview;
+		this.posterImg = posterImg;
 		this.director = director;
 		this.status = Status.AVAILABLE;
 		this.reviews = new ArrayList<Review>();

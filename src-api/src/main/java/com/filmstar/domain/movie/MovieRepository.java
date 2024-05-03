@@ -15,4 +15,5 @@ public interface MovieRepository {
 
 	Movie findByIdOrFail(MovieId id) throws MovieNotFound;
 
+	List<Movie> findMoviesByTitleStartingWith(Title title);
 }

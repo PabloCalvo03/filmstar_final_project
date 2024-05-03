@@ -4,15 +4,18 @@ public class UserSignupPostRequest {
     String email;
   String username;
   String password;
+
+  String invitationCode;
   
   public UserSignupPostRequest() {
 	  
   }
   
-  public UserSignupPostRequest(String email, String username, String password) {
+  public UserSignupPostRequest(String email, String username, String password, String invitationCode) {
       this.email = email;
 	  this.username = username;
 	  this.password = password;
+      this.invitationCode = invitationCode;
   }
 
 public String getUsername() {
@@ -35,5 +38,12 @@ public void setPassword(String password) {
 
 public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getInvitationCode() {
+        return invitationCode;
+    }
+    public void setInvitationCode(String invitationCode) {
+        this.invitationCode = invitationCode;
     }
 }
