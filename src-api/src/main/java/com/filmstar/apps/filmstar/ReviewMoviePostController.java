@@ -16,7 +16,7 @@ import com.filmstar.domain.movie.MovieRepository;
 import com.filmstar.domain.movie.Review;
 
 @RestController
-@RequestMapping(method=RequestMethod.POST, value="/api/movierecords/movies/{id}/reviews")
+@RequestMapping(method=RequestMethod.POST, value="/api/filmstar/movies/{id}/reviews")
 public class ReviewMoviePostController {
 	
 	@Autowired

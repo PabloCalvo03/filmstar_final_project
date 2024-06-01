@@ -17,11 +17,13 @@ public class AddMovieUseCase {
         this.directorRepository = directorRepository;
     }
 
-    public Movie execute(String id, String title, String description, String posterImg, String directorId) throws DirectorNotFound,
+    public Movie execute(String id, String title, String description, Integer year, String posterImg,
+                         String directorId) throws DirectorNotFound,
             ValueError {
         Director director = directorRepository.findByIdOrFail(new DirectorId(directorId));
         Movie movie = Movie.register(new MovieId(id), new Title(title), new Overview(description),
                 new PosterImg(posterImg),
+                new Year(year),
                 new Director(director.id(), director.name(), director.surname()));
         movieRepository.save(movie);
         return movie;

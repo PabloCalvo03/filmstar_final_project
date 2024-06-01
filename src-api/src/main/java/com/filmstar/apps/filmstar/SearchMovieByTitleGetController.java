@@ -15,8 +15,8 @@ import java.util.stream.Collectors;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping(value = "/api/movierecords/movies/query")
-@Qualifier("movierecords")
+@RequestMapping(value = "/api/filmstar/movies/query")
+@Qualifier("filmstar")
 public class SearchMovieByTitleGetController {
 
     Logger logger = LoggerFactory.getLogger(SearchMovieByTitleGetController.class);

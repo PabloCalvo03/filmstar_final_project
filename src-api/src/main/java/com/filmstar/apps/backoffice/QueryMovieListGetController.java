@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.filmstar.domain.movie.MovieRepository;
 
-@RestController("movierecords")
+@RestController("filmstar")
 @RequestMapping(value = "/api/backoffice/movies")
 @Qualifier("backoffice")
 public class QueryMovieListGetController {

@@ -13,8 +13,8 @@ import com.filmstar.domain.movie.MovieRepository;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping(value = "/api/movierecords/movies")
-@Qualifier("movierecords")
+@RequestMapping(value = "/api/filmstar/movies")
+@Qualifier("filmstar")
 public class QueryMovieListGetController {
 	
 	@Autowired

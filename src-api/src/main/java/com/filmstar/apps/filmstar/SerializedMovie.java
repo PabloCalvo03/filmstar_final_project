@@ -12,17 +12,19 @@ public class SerializedMovie {
 	public String id;
     public String title;
     public String overview;
-
+	public Integer year;
 	public String posterImg;
 	public List<Review> reviews;
 
 	public SerializedDirector director;
     
-    public SerializedMovie(String id, String title, String overview, List<Review> reviews, String posterImg,
+    public SerializedMovie(String id, String title, String overview, List<Review> reviews,
+						   Integer year, String posterImg,
 						   SerializedDirector movieDirector) {
 		this.id = id;
 		this.title = title;
 		this.overview = overview;
+		this.year = year;
 		this.posterImg = posterImg;
 		this.reviews = reviews;
 		this.director = movieDirector;
@@ -35,6 +37,7 @@ public class SerializedMovie {
 				movie.title().value(),
 				movie.overview().value(),
 				reviews,
+				movie.year().value(),
 				movie.posterImg().value(),
 				SerializedDirector.from(movie.director())
 		);

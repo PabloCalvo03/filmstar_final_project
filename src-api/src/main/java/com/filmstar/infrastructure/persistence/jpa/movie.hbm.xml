@@ -16,6 +16,10 @@
             <property name="value" column="overview" type="string" access="field" />
         </component>
 
+        <component name="year" class="com.filmstar.domain.movie.Year" access="field">
+            <property name="value" column="year" type="number" access="field" />
+        </component>
+
         <component name="posterImg" class="com.filmstar.domain.movie.PosterImg" access="field">
             <property name="value" column="poster_img" type="string" access="field" />
         </component>
