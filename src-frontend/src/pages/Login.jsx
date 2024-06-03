@@ -18,6 +18,12 @@ const Login = () => {
   }, [user, navigate]);
 
   const handleLogin = async () => {
+    // Validate that the username and password fields are not empty
+    if (!username || !password) {
+      setError('Please fill in both username and password.');
+      return;
+    }
+
     try {
       const response = await fetch('http://localhost:8080/api/login', {
         method: 'POST',
@@ -27,34 +33,42 @@ const Login = () => {
         body: JSON.stringify({ username, password }),
       });
 
+      if (response.status === 401) {
+        throw new Error('Incorrect username or password.');
+      }
+
       if (!response.ok) {
-        throw new Error('Credenciales inválidas');
+        throw new Error('Something went wrong. Please try again later.');
       }
 
       const userData = await response.json();
       dispatch(login(userData));
       
-      // Guardar el token en localStorage
+      // Save the token in localStorage
       localStorage.setItem('user', JSON.stringify(userData));
     } catch (error) {
-      setError(error.message);
+      if (error.message === 'Failed to fetch') {
+        setError('Unable to connect to the server. Please check your internet connection and try again.');
+      } else {
+        setError(error.message);
+      }
     }
   };
 
   return (
     <div className="flex items-center justify-center min-h-screen dark:bg-zinc-900 text-white">
       <div className="bg-gray-800 p-8 rounded-lg shadow-md w-80">
-        <h2 className="text-2xl font-bold mb-4 text-center">Iniciar sesión</h2>
+        <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
         <input
           type="text"
-          placeholder="Nombre de usuario"
+          placeholder="Username"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           className="dark:bg-gray-700 dark:text-white border border-gray-900 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:border-blue-500 w-full"
         />
         <input
           type="password"
-          placeholder="Contraseña"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="dark:bg-gray-700 dark:text-white border border-gray-900 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:border-blue-500 w-full"
@@ -64,10 +78,10 @@ const Login = () => {
           onClick={handleLogin}
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 w-full"
         >
-          Iniciar sesión
+          Login
         </button>
         <div className="mt-4 text-center">
-          <Link to="/signup" className="text-blue-400 hover:underline">Registrarse con código de invitación</Link>
+          <Link to="/signup" className="text-blue-400 hover:underline">Sign up with invitation code</Link>
         </div>
       </div>
     </div>

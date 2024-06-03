@@ -3,6 +3,8 @@ package com.filmstar.apps.filmstar;
 import com.filmstar.domain.movie.Movie;
 import com.filmstar.domain.movie.MovieId;
 import com.filmstar.domain.movie.MovieRepository;
+import com.filmstar.domain.shared.ValueError;
+
 import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -14,7 +16,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping(value = "/api/movierecords/movies/{id}")
+@RequestMapping(value = "/api/filmstar/movies/{id}")
 @Qualifier("movierecords")
 public class QueryMovieByIdGetController {
 
@@ -22,7 +24,7 @@ public class QueryMovieByIdGetController {
     private MovieRepository movieRepository;
 
     @GetMapping
-    public ResponseEntity<SerializedMovie> execute(@PathVariable("id") String id){
+    public ResponseEntity<?> execute(@PathVariable("id") String id) throws ValueError{
         return new ResponseEntity<>(SerializedMovie.from(movieRepository.findById(new MovieId(id)).get()),
                 HttpStatus.OK);
     }

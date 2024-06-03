@@ -32,7 +32,7 @@ public class Movie {
 	}
 	
 	public static Movie register(MovieId id, Title title, Overview overview, PosterImg posterImg,
-								 Year year, Director director) {
+								 Year year, Director director) throws IllegalArgumentException {
 		return new Movie(id, title, overview, year, posterImg, director);
 	}
 	

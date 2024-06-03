@@ -31,13 +31,8 @@ const user = useSelector(state => state.user);
     }, 300);
   };
 
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    // Realizar alguna acción adicional si es necesario
-  };
-
   return (
-    <form onSubmit={handleSubmit} className="w-full mx-auto">   
+    <form className="w-full mx-auto">   
         <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-100 sr-only dark:text-white">Search</label>
         <div className="relative">
             <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">

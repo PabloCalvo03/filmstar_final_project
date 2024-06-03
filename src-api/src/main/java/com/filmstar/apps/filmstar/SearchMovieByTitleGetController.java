@@ -4,6 +4,8 @@ import com.filmstar.domain.movie.Movie;
 import com.filmstar.domain.movie.MovieRepository;
 import com.filmstar.domain.movie.Title;
 import com.filmstar.domain.movie.TitleLenghtNotValid;
+import com.filmstar.domain.shared.ValueError;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +29,11 @@ public class SearchMovieByTitleGetController {
 
     // Maneja las solicitudes GET para buscar películas por título
     @GetMapping
-    public List<SerializedMovie> searchMoviesStartingWithTitle(@RequestParam String query) {
+    public List<SerializedMovie> searchMoviesStartingWithTitle(@RequestParam String query) throws ValueError {
+    	if(query == "" || query == null || query.length() == 0) {
+    		return movieRepository.findAllAvailable().stream().map(SerializedMovie::from)
+                    .collect(Collectors.toList());
+    	}
         try {
             logger.info("Buscando películas con título que comienza con: " + query);
 

@@ -6,9 +6,11 @@ import MovieCard from "./MovieCard";
 const Main = () => {
   const user = useSelector(state => state.user);
   const [movies, setMovies] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+
   useEffect(() => {
     if (!user) return; // Salir si no hay un token de usuario
-    fetch("http://localhost:8080/api/movierecords/movies", {
+    fetch("http://localhost:8080/api/filmstar/movies", {
       headers: {
         Authorization: "Bearer " + user.user.accessToken, // Usar el token de usuario en la cabecera de autorización
       },
@@ -19,14 +21,17 @@ const Main = () => {
         }
         return response.json();
       })
-      .then((data) => setMovies(data))
+      .then((data) => {
+        setMovies(data);
+        setIsLoading(false); // Marcamos que la carga ha terminado
+      })
       .catch(error => console.error('Error fetching movies:', error));
   }, [user]);
 
   const fetchSearch = async (inputValue, abortController) => {
     if(!user) return
     try {
-      const response = await fetch(`http://localhost:8080/api/movierecords/movies/query?query=${inputValue}`, {
+      const response = await fetch(`http://localhost:8080/api/filmstar/movies/query?query=${inputValue}`, {
         signal: abortController.signal,
         headers: {
           Authorization: "Bearer " + user.user.accessToken // Agregar el token de acceso al encabezado de autorización
@@ -41,10 +46,8 @@ const Main = () => {
       setMovies(data);
     } catch (error) {
       if (error.name === 'AbortError') {
-        // La solicitud fue cancelada
         console.log('Search request was aborted');
       } else {
-        // Error de red u otro error
         console.error('Error searching movies:', error);
       }
     }
@@ -57,9 +60,17 @@ const Main = () => {
         <br />
         <SearchBar by="title" setMovies={setMovies} fetchSearch={fetchSearch}></SearchBar>
         <br />
-        <div className="grid grid-cols-2 gap-4 lg:grid-cols-5 md:grid-cols-2 justify-items-center">
-          {movies.map((movie) => <MovieCard movie={movie} key={movie.id}/>)}
-        </div>
+        {isLoading ? (
+          <p>Cargando películas...</p>
+        ) : (
+          <div className="grid grid-cols-2 gap-4 lg:grid-cols-5 md:grid-cols-2 justify-items-center">
+            {movies.length === 0 ? (
+              <p>No hay películas disponibles.</p>
+            ) : (
+              movies.map((movie) => <MovieCard movie={movie} key={movie.id}/>)
+            )}
+          </div>
+        )}
       </div>
   );
 };

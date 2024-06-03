@@ -5,13 +5,15 @@ import java.io.Serializable;
 public class UserResponse implements Serializable {
 	private String accessToken;
 	private String expirationDate;
+	private String role;
 
 	public UserResponse() {
 	}
 
-	public UserResponse(String accessToken, String expirationDate) {
+	public UserResponse(String accessToken, String expirationDate, String role) {
 		this.accessToken = accessToken;
 		this.expirationDate = expirationDate;
+		this.role = role;
 	}
 
 
@@ -31,5 +33,12 @@ public class UserResponse implements Serializable {
 		this.expirationDate = expirationDate;
 	}
 
+	public String getRole() {
+		return role;
+	}
+
+	public void setRole(String role) {
+		this.role = role;
+	}
 
 }

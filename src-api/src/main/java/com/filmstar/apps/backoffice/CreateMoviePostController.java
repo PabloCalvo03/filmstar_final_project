@@ -6,6 +6,7 @@ import com.filmstar.domain.shared.ValueError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +20,7 @@ import com.filmstar.domain.movie.MovieRepository;
 
 @RestController
 @RequestMapping("/api/backoffice/movies")
+@CrossOrigin("*")
 public class CreateMoviePostController {
 	
 	@Autowired
@@ -31,7 +33,7 @@ public class CreateMoviePostController {
 	public ResponseEntity<?> execute(@RequestBody CreateMoviePostRequest movieRequest) {
 		try {
 			Movie movie = new AddMovieUseCase(movieRepository, directorRepository).execute(movieRequest.id,
-					movieRequest.title, movieRequest.description, movieRequest.year, movieRequest.posterImg,
+					movieRequest.title, movieRequest.overview, movieRequest.year, movieRequest.posterImg,
 					movieRequest.directorId);
 			return new ResponseEntity<>(SerializedMovie.from(movie), HttpStatus.CREATED);
 		} catch (DirectorNotFound | ValueError e) {
@@ -41,22 +43,3 @@ public class CreateMoviePostController {
 	}
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-// 1. Crear agregado director
-
-// 2. Request MoviePostRequest director_id
-
-// 3. Post controller director
-
-// 4. MovieReview

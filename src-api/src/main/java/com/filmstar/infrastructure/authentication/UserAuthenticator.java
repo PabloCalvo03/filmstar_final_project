@@ -37,7 +37,7 @@ public class UserAuthenticator {
 
         return new UserResponse(
                 authenticationTokenCreator.createToken(user.get().username().value(), user.get().role())
-                        , expirationDate);
+                        , expirationDate, user.get().role().name());
     }
 
     private void ensureUserExist(final Optional<User> user, final Username username) {

@@ -20,7 +20,7 @@ const UserTokenLoader = () => {
         navigate('/login'); // Redirige al usuario a la ruta de inicio de sesión
       } else {
         // Token válido, iniciar sesión
-        dispatch(login({ accessToken: user.accessToken, expirationDate: user.expirationDate }));
+        dispatch(login({ accessToken: user.accessToken, expirationDate: user.expirationDate, role: user.role }));
       }
     }
   }, [dispatch, navigate]); 

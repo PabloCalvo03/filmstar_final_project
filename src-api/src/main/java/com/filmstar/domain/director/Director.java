@@ -11,6 +11,15 @@ public class Director {
 	}
 	
 	public Director(DirectorId id, Name name, Surname surname) {
+		if (id == null) {
+            throw new IllegalArgumentException("Director ID cannot be null");
+        }
+        if (name == null) {
+            throw new IllegalArgumentException("Name cannot be null");
+        }
+        if (surname == null) {
+            throw new IllegalArgumentException("Surname cannot be null");
+        }
 		this.id = id;
 		this.name = name; 
 		this.surname = surname;

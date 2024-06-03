@@ -62,7 +62,7 @@ public class UserRegister {
     String expirationDate = expirationInstant.toString();
     return new UserResponse(
             authenticationTokenCreator.createToken(newUser.username().value(), newUser.role())
-    , expirationDate);
+    , expirationDate, newUser.role().name());
   }
 
   public void ensureUserDoesNotExist(Optional<User> userByUsername, Optional<User> userByEmail,

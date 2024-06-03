@@ -9,19 +9,19 @@
         </composite-id>
 
         <component name="title" class="com.filmstar.domain.movie.Title" access="field">
-            <property name="value" column="title" type="string" access="field" />
+            <property name="value" column="title" type="string" access="field" not-null="true" />
         </component>
 
         <component name="overview" class="com.filmstar.domain.movie.Overview" access="field">
-            <property name="value" column="overview" type="string" access="field" />
+            <property name="value" column="overview" type="string" access="field" not-null="true" />
         </component>
 
         <component name="year" class="com.filmstar.domain.movie.Year" access="field">
-            <property name="value" column="year" type="number" access="field" />
+            <property name="value" column="year" type="string" access="field" not-null="true" />
         </component>
 
         <component name="posterImg" class="com.filmstar.domain.movie.PosterImg" access="field">
-            <property name="value" column="poster_img" type="string" access="field" />
+            <property name="value" column="poster_img" type="string" access="field" not-null="true" />
         </component>
         
 		<many-to-one name="director" class="com.filmstar.domain.director.Director" fetch="select" access="field" cascade="all">

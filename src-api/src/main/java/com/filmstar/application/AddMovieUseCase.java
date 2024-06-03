@@ -17,7 +17,7 @@ public class AddMovieUseCase {
         this.directorRepository = directorRepository;
     }
 
-    public Movie execute(String id, String title, String description, Integer year, String posterImg,
+    public Movie execute(String id, String title, String description, String year, String posterImg,
                          String directorId) throws DirectorNotFound,
             ValueError {
         Director director = directorRepository.findByIdOrFail(new DirectorId(directorId));

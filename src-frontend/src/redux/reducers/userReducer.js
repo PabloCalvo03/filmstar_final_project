@@ -1,11 +1,10 @@
 // ./redux/reducers/userReducer.js
 
-// Definir los tipos de acciones
 const LOGIN = 'LOGIN';
 const LOGOUT = 'LOGOUT';
 const GET_USER = 'GET_USER';
 
-// Obtener el estado de usuario almacenado en localStorage si existe
+// Estado inicial
 const initialState = {
     user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
 };
@@ -25,7 +24,10 @@ const userReducer = (state = initialState, action) => {
                 user: null,
             };
         case GET_USER:
-            return localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null;
+            return {
+                ...state,
+                user: localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')) : null,
+            };
         default:
             return state;
     }

@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 
 const ProfilePreview = ({ avatar}) => {
     const user = useSelector(state => state.user);
+    console.log(user);
+    
     const [userProfile, setUserProfile] = useState(null);
     useEffect(() => {
       if(!user) return;
