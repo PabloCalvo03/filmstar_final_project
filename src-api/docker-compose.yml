@@ -23,10 +23,8 @@ services:
     environment:
       - MYSQL_DATABASE=filmstar_db
       - MYSQL_ROOT_PASSWORD=root
-    command: --init-file /data/application/init.sql
     volumes:
-      - ./init.sql:/data/application/init.sql
-      - mysql-data:/var/lib/mysql
+      - ./mysql-data:/var/lib/mysql
     networks:
       - springboot-mysql-network
     healthcheck:

@@ -1,11 +1,8 @@
 FROM openjdk:17
-
-# Copy the JAR package into the image
-ARG JAR_FILE=target/*.jar
-COPY ${JAR_FILE} app.jar
-
-# Expose the application port
-EXPOSE 8090
-
-# Run the App
-ENTRYPOINT ["java", "-jar", "/app.jar"]
+WORKDIR /app
+COPY .mvn/ .mvn
+COPY mvnw pom.xml ./
+COPY src ./src
+CMD ["./mvnw", "clean", "package"]
+CMD ["./mvnw", "clean", "package", "spring-boot:repackage"]
+CMD ["java", "-jar", "./target/filmstar-0.0.1-SNAPSHOT.jar"]
