@@ -5,9 +5,7 @@ function Home() {
 
   return (
     <>
-        <Layout>
           <Catalog />
-        </Layout>
     </>
   )
 }

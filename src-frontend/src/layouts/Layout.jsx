@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar";
 const Layout = ({ children }) => {
     return <>
         <Sidebar/>
-        <div className="w-full px-[100px] py-[40px] bg-gray-100 dark:bg-zinc-900 min-h-svh ms-[0px] sm:ps-[355px]">
+        <div className="w-full px-[100px] py-[20px] bg-gray-100 dark:bg-zinc-900 min-h-screen lg:ps-[355px] md:ps-[355px] sm:ps-[355px]">
       <button
         data-drawer-target="sidebar-multi-level-sidebar"
         data-drawer-toggle="sidebar-multi-level-sidebar"

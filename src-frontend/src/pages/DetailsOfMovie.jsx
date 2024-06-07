@@ -5,9 +5,7 @@ function DetailsOfMovie() {
 
   return (
     <>
-        <Layout>
             <MovieDetail />
-        </Layout>
     </>
   )
 }

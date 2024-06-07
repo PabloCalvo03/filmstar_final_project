@@ -5,7 +5,7 @@ function CreateMovie() {
 
   return (
     <>
-            <MovieForm />
+            <MovieEditForm />
     </>
   )
 }

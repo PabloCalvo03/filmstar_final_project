@@ -32,11 +32,17 @@ const MovieCard = ({ movie }) => {
           </div>
         )}
         <img
-          className={`w-full h-auto rounded-t-lg ${!imageLoaded ? 'hidden' : ''}`}
+          className={`w-full rounded-t-lg ${!imageLoaded ? 'hidden' : ''}`}
           src={movie.posterImg}
           alt={movie.title}
           onLoad={handleImageLoad}
         />
+        <div className="p-4 text-center">
+          <h5 className="mb-2 text-xs sm:text-sm md:text-md lg:text-md font-bold text-gray-900 dark:text-white truncate">
+            {/* Aquí se aplican las clases responsivas con el tamaño del texto de menor a mayor */}
+            {truncatedTitle}
+          </h5>
+        </div>
         {!imageLoaded && (
           <div className="w-full h-auto p-4 flex justify-center items-center">
             <span className="text-gray-600 dark:text-gray-400">

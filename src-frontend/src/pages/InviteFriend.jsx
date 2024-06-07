@@ -5,9 +5,7 @@ function InviteFriend() {
 
   return (
     <>
-        <Layout>
           <InvitationForm />
-        </Layout>
     </>
   )
 }

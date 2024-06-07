@@ -5,9 +5,7 @@ function AdminMovieCRUD() {
 
   return (
     <>
-        <Layout>
             <MovieAdmin />
-        </Layout>
     </>
   )
 }

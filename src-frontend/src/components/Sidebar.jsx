@@ -41,7 +41,7 @@ const Sidebar = () => {
         <div className="h-full px-3 py-4 overflow-y-auto bg-gray-200 dark:bg-gray-800">
           <ul className="space-y-2 font-medium">
             <li>
-              <ProfilePreview avatar="https://lh3.googleusercontent.com/ogw/AF2bZyjV44vUFxlNxI9TqNG7hPUHbsfFS7KrnUwFRt4kMpIIkP2z=s64-c-mo"></ProfilePreview>
+              <ProfilePreview avatar="https://lh3.googleusercontent.com/a/ACg8ocJeIt3SovdYBUm8IQ9PrbVTlcadJl88pY7I0dE714RierFA4Q=s192-c-mo"></ProfilePreview>
             </li>
             <li>
               <a

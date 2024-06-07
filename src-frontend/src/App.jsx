@@ -9,63 +9,35 @@ import InviteFriend from './pages/InviteFriend';
 import ProtectedAdminRoute from './routes/ProtectedAdminRoute';
 import CreateMovie from './pages/CreateMovie';
 import AdminMovieCRUD from './pages/AdminMovieCRUD';
+import Layout from './layouts/Layout';
+import MovieEditForm from './components/MovieEditForm';
 
 function App() {
   return (
     <Router>
-      <UserTokenLoader /> 
+      <UserTokenLoader />
       <Routes>
-      <Route
-          path="/home"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/"
-          element={
-            <ProtectedRoute>
-              <Home />
-            </ProtectedRoute>
-          }
-        />
-        <Route 
-          path="/movie/:id" 
-          element={
-            <ProtectedRoute>
-              <DetailsOfMovie/>
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/invite-friend" 
-          element={
-            <ProtectedRoute>
-              <InviteFriend/>
-            </ProtectedRoute>
-          } 
-        />
-        <Route 
-          path="/create-movie" 
-          element={
-            <ProtectedAdminRoute>
-              <CreateMovie/>
-            </ProtectedAdminRoute>
-          } 
-        />
-        <Route 
-          path="/admin-movies" 
-          element={
-            <ProtectedAdminRoute>
-              <AdminMovieCRUD/>
-            </ProtectedAdminRoute>
-          } 
-        />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
-        </Routes>
+        <Route
+          path="/*"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <Routes>
+                  <Route path="/home" element={<Home />} />
+                  <Route path="/" element={<Home />} />
+                  <Route path="/movie/:id" element={<DetailsOfMovie />} />
+                  <Route path="/invite-friend" element={<InviteFriend />} />
+                  <Route path="/create-movie" element={<ProtectedAdminRoute><CreateMovie /></ProtectedAdminRoute>} />
+                  <Route path="/create-movie/:movieId" element={<ProtectedAdminRoute><MovieEditForm /></ProtectedAdminRoute>} />
+                  <Route path="/admin-movies" element={<ProtectedAdminRoute><AdminMovieCRUD /></ProtectedAdminRoute>} />
+                </Routes>
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
     </Router>
   );
 }

@@ -10,6 +10,7 @@ const MovieAdmin = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
+        if(!user) return;
         const fetchMovies = async () => {
             try {
                 const response = await fetch('http://localhost:8080/api/backoffice/movies', {
@@ -33,8 +34,9 @@ const MovieAdmin = () => {
         fetchMovies();
     }, [user]);
 
+
     const handleEdit = (movieId) => {
-        navigate(`/edit/${movieId}`);
+        navigate(`/create-movie/${movieId}`);
     };
 
     const handleDelete = async (movieId) => {
@@ -65,21 +67,21 @@ const MovieAdmin = () => {
     }
 
     return (
-        <div>
-            <h1 className="text-3xl font-[600] dark:text-white pb-2">Movie List</h1>
+        <div className="container mx-auto px-4 py-8 rounded-lg shadow-md">
+            <h1 className="text-3xl font-semibold pb-4 text-gray-800 dark:text-white">Movie List</h1>
             {movies.length === 0 ? (
-                <p>No movies found.</p>
+                <p className="text-gray-600 dark:text-gray-300">No movies found.</p>
             ) : (
-                <ul>
+                <ul className="space-y-4">
                     {movies.map(movie => (
-                        <li key={movie.id} className="flex items-center justify-between py-2 border-b border-gray-200">
+                        <li key={movie.id} className="flex dark:bg-gray-800 items-center justify-between py-2 px-4 border border-gray-300 dark:border-gray-700 rounded-lg">
                             <div>
-                                <h2>{movie.title}</h2>
-                                <p>{movie.overview}</p>
+                                <h2 className="text-lg font-semibold text-gray-800 dark:text-white">{movie.title}</h2>
+                                <p className="text-gray-600 dark:text-gray-300">{movie.overview}</p>
                             </div>
-                            <div>
-                                <button onClick={() => handleEdit(movie.id)}>Edit</button>
-                                <button onClick={() => handleDelete(movie.id)}>Delete</button>
+                            <div className="flex-shrink-0">
+                                <button onClick={() => handleEdit(movie.id)} className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">Edit</button>
+                                <button onClick={() => handleDelete(movie.id)} className="text-red-500 hover:text-red-700 ml-2 dark:text-red-400 dark:hover:text-red-300">Delete</button>
                             </div>
                         </li>
                     ))}
