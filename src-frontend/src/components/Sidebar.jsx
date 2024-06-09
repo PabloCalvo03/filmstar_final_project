@@ -83,7 +83,7 @@ const Sidebar = () => {
                 <span className="flex-1 ms-3 whitespace-nowrap">Home</span>
               </a>
             </li>
-            <hr className="border-black dark:border-white"/>
+            <hr className="border-black dark:border-white" />
             {user && user.user.role === "ADMIN" && (
               <>
                 <li>
@@ -144,17 +144,17 @@ const Sidebar = () => {
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                 onClick={handleInviteFriend}
               ><svg
-              className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-              aria-hidden="true"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="currentColor"
-              viewBox="0 0 20 20"
-            >
-              <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z" />
-              <path d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z" />
-              <path d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z" />
-            </svg>
-                
+                className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="currentColor"
+                viewBox="0 0 20 20"
+              >
+                  <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z" />
+                  <path d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z" />
+                  <path d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z" />
+                </svg>
+
                 <span className="flex-1 ms-3 whitespace-nowrap">
                   Invite friend
                 </span>
@@ -191,33 +191,56 @@ const Sidebar = () => {
             >
               {darkMode ? (
                 <svg
-                  className="flex-shrink-0 w-5 h-5 text-yellow-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  aria-hidden="true"
+                  viewBox="0 0 24 24"
+                  fill="none"
                   xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
+                  className="flex-shrink-0 w-5 h-5 text-gray-500"
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M10 18c-4.4183 0-8-3.5817-8-8s3.5817-8 8-8c4.4183 0 8 3.5817 8 8s-3.5817 8-8 8zM0 10c0 5.5229 4.4771 10 10 10s10-4.4771 10-10S15.5229 0 10 0 0 4.4771 0 10z"
-                    clipRule="evenodd"
-                  />
-                  <circle cx="10" cy="10" r="5" />
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <g clipPath="url(#a)" stroke="#6b7280" strokeWidth="1.5" strokeMiterlimit="10">
+                      <path
+                        d="M5 12H1M23 12h-4M7.05 7.05 4.222 4.222M19.778 19.778 16.95 16.95M7.05 16.95l-2.828 2.828M19.778 4.222 16.95 7.05"
+                        strokeLinecap="round"
+                      ></path>
+                      <path
+                        d="M12 16a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z"
+                        fill="#6b7280"
+                        fillOpacity=".16"
+                      ></path>
+                      <path d="M12 19v4M12 1v4" strokeLinecap="round"></path>
+                    </g>
+                    <defs>
+                      <clipPath id="a">
+                        <path fill="#ffffff" d="M0 0h24v24H0z"></path>
+                      </clipPath>
+                    </defs>
+                  </g>
                 </svg>
+
+
               ) : (
                 <svg
-                  className="flex-shrink-0 w-5 h-5 text-gray-900 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
-                  aria-hidden="true"
+                  viewBox="0 0 32 32"
                   xmlns="http://www.w3.org/2000/svg"
-                  fill="currentColor"
-                  viewBox="0 0 20 20"
+                  fill="#6b7280"
+                  className="flex-shrink-0 w-5 h-5 text-gray-500"
                 >
-                  <path
-                    fillRule="evenodd"
-                    d="M13.79 10.636l3.535-3.536 1.415 1.415-3.535 3.536-1.415-1.415zM10 18c-4.418 0-8-3.582-8-8 0-3.325 2.05-6.168 4.95-7.333a.75.75 0 0 1 .549.02c.148.06.284.142.404.248.513.413.844.972 1.004 1.581.019.098.089.188.187.248C9.834 4.064 9.917 4 10 4c3.309 0 6 2.691 6 6 0 3.309-2.691 6-6 6zm0-14c-4.418 0-8 3.582-8 8 0 3.157 1.857 5.847 4.513 7.083-.029-.023-.057-.048-.086-.071-.142-.113-.264-.247-.367-.395-.316-.43-.506-.972-.546-1.583-.002-.025-.016-.047-.016-.073C6.006 14.24 6 14.122 6 14c0-3.309 2.691-6 6-6 1.18 0 2.274.428 3.117 1.133l.009-.006.014.014c.3.332.705.518 1.15.518 1.104 0 2-.896 2-2 0-.446-.15-.857-.4-1.191l-.031-.044L15.2 4.564 13.79 3.15 12.376 4.564l.426.426C11.266 4.243 10.648 4 10 4z"
-                    clipRule="evenodd"
-                  />
+                  <g id="SVGRepo_bgCarrier" strokeWidth="0"></g>
+                  <g id="SVGRepo_tracerCarrier" strokeLinecap="round" strokeLinejoin="round"></g>
+                  <g id="SVGRepo_iconCarrier">
+                    <g id="Lager_94" data-name="Lager 94" transform="translate(0)">
+                      <path
+                        id="Path_70"
+                        data-name="Path 70"
+                        d="M12.516,4.509A12,12,0,0,0,22.3,19.881,12.317,12.317,0,0,0,24,20a11.984,11.984,0,0,0,3.49-.514,12.1,12.1,0,0,1-9.963,8.421A12.679,12.679,0,0,1,16,28,12,12,0,0,1,12.516,4.509M16,0a16.5,16.5,0,0,0-2.212.15A16,16,0,0,0,16,32a16.526,16.526,0,0,0,2.01-.123A16.04,16.04,0,0,0,31.85,18.212,16.516,16.516,0,0,0,32,15.944,1.957,1.957,0,0,0,30,14a2.046,2.046,0,0,0-1.23.413A7.942,7.942,0,0,1,24,16a8.35,8.35,0,0,1-1.15-.08,7.995,7.995,0,0,1-5.264-12.7A2.064,2.064,0,0,0,16.056,0Z"
+                        fill="#6b7280"
+                      ></path>
+                    </g>
+                  </g>
                 </svg>
+
               )}
               <span className="flex-1 ms-3 whitespace-nowrap">{darkMode ? "Light Mode" : "Dark Mode"}</span>
             </a>

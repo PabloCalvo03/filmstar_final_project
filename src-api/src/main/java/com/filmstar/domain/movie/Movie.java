@@ -1,9 +1,11 @@
 package com.filmstar.domain.movie;
 
 import com.filmstar.domain.director.Director;
+import com.filmstar.domain.user.User;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class Movie {
 	
@@ -94,4 +96,11 @@ public class Movie {
 		}
 		return sum / ratings.size();
 	}
+
+	public Optional<Rating> ratingFromUser(User user) {
+		return ratings.stream()
+				.filter(rating -> rating.getEvaluator().email().value().equals(user.email().value()))
+				.findFirst();
+	}
+
 }
