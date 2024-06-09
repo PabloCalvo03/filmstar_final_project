@@ -15,10 +15,10 @@ public class SerializedMovie {
 	public String year;
 	public String posterImg;
 	public List<Review> reviews;
-
+	public double averageRating;
 	public SerializedDirector director;
     
-    public SerializedMovie(String id, String title, String overview, List<Review> reviews,
+    public SerializedMovie(String id, String title, String overview, List<Review> reviews, double averageRating,
 						   String year, String posterImg,
 						   SerializedDirector movieDirector) {
 		this.id = id;
@@ -27,6 +27,7 @@ public class SerializedMovie {
 		this.year = year;
 		this.posterImg = posterImg;
 		this.reviews = reviews;
+		this.averageRating = averageRating;
 		this.director = movieDirector;
 	}
 
@@ -37,6 +38,7 @@ public class SerializedMovie {
 				movie.title().value(),
 				movie.overview().value(),
 				reviews,
+				movie.calculateAverageRating(),
 				movie.year().value(),
 				movie.posterImg().value(),
 				SerializedDirector.from(movie.director())

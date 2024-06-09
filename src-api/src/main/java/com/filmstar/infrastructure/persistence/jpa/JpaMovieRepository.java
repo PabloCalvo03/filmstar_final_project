@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.filmstar.domain.movie.*;
+import com.filmstar.domain.shared.ValueError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
 import org.springframework.stereotype.Service;
@@ -41,8 +42,18 @@ public class JpaMovieRepository implements MovieRepository{
 	}
 
 	@Override
-	public List<Movie> findMoviesByTitleStartingWith(Title title){
-		return movieRepository.findMoviesByTitleStartingWith(title.value());
+	public List<Movie> findMoviesByTitleContainingAndAvailable(Title title){
+		return movieRepository.findMoviesByTitleContainingAndAvailable(title.value());
+	};
+
+	@Override
+	public void deactivateMovie(MovieId movieId) {
+		movieRepository.deactivateMovie(movieId);
+	};
+
+	@Override
+	public void activateMovie(MovieId movieId) {
+		movieRepository.activateMovie(movieId);
 	};
 
 }

@@ -10,5 +10,8 @@
         <property name="comment" type="string" access="field">
             <column name="comment" />
         </property>
+        <many-to-one name="reviewer" class="com.filmstar.domain.user.User" fetch="join" access="field">
+            <column name="reviewer" not-null="true" />
+        </many-to-one>
     </class>
 </hibernate-mapping>

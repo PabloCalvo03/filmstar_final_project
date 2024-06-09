@@ -12,21 +12,16 @@ const user = useSelector(state => state.user);
     const inputValue = event.target.value;
     setQuery(inputValue);
 
-    // Cancelar el temporizador de escritura si existe
     clearTimeout(typingTimeoutRef.current);
 
-    // Configurar un nuevo temporizador para realizar la búsqueda después de 300 milisegundos
     typingTimeoutRef.current = setTimeout(() => {
-      // Cancelar la solicitud anterior si existe
       if (abortControllerRef.current) {
         abortControllerRef.current.abort();
       }
 
-      // Crear un nuevo controlador de aborto
       const abortController = new AbortController();
       abortControllerRef.current = abortController;
 
-      // Realizar la búsqueda
       fetchSearch(inputValue, abortController);
     }, 300);
   };
@@ -43,7 +38,7 @@ const user = useSelector(state => state.user);
             <input 
               type="search" 
               id="default-search" 
-              className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
+              className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white   focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" 
               placeholder={`Search by ${by}...`} 
               value={query} 
               onChange={handleChange} 

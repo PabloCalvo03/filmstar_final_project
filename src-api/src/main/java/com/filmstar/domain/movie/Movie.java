@@ -14,6 +14,7 @@ public class Movie {
 	private PosterImg posterImg;
 	private Director director;
 	private List<Review> reviews;
+	private List<Rating> ratings;
 	private Status status;
 
 	public Movie() {
@@ -29,6 +30,7 @@ public class Movie {
 		this.year = year;
 		this.status = Status.AVAILABLE;
 		this.reviews = new ArrayList<Review>();
+		this.ratings = new ArrayList<Rating>();
 	}
 	
 	public static Movie register(MovieId id, Title title, Overview overview, PosterImg posterImg,
@@ -38,6 +40,10 @@ public class Movie {
 	
 	public void addReview(Review review) {
 		this.reviews.add(review);
+	}
+
+	public void addRating(Rating rating){
+		this.ratings.add(rating);
 	}
 
 
@@ -66,6 +72,9 @@ public class Movie {
 	public List<Review> reviews() {
 		return reviews;
 	}
+	public List<Rating> ratings() {
+		return ratings;
+	}
 
 	public Status status() {
 		return status;
@@ -75,4 +84,14 @@ public class Movie {
 		return posterImg;
 	}
 
+	public double calculateAverageRating() {
+		if (ratings.isEmpty()) {
+			return 0.0;
+		}
+		double sum = 0.0;
+		for (Rating rating : ratings) {
+			sum += rating.getRating();
+		}
+		return sum / ratings.size();
+	}
 }

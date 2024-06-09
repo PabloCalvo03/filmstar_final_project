@@ -20,6 +20,8 @@ const MovieAdmin = () => {
                 });
                 if (response.ok) {
                     const data = await response.json();
+                    console.log(data)
+
                     setMovies(data);
                 } else {
                     console.error('Failed to fetch movies');
@@ -36,52 +38,65 @@ const MovieAdmin = () => {
 
 
     const handleEdit = (movieId) => {
-        navigate(`/create-movie/${movieId}`);
+        navigate(`/edit-movie/${movieId}`);
     };
 
-    const handleDelete = async (movieId) => {
-        const confirmDelete = window.confirm('Are you sure you want to delete this movie?');
-        if (!confirmDelete) return;
-
+    const handleAction = async (movieId, status) => {
+        const confirmAction = window.confirm(`Are you sure you want to ${status === 'AVAILABLE' ? 'deactivate' : 'activate'} this movie?`);
+        if (!confirmAction) return;
+    
         try {
-            const response = await fetch(`http://localhost:8080/api/backoffice/movies/${movieId}`, {
-                method: 'DELETE',
+            const response = await fetch(`http://localhost:8080/api/backoffice/movies/${status === 'AVAILABLE' ? 'deactivate' : 'activate'}/${movieId}`, {
+                method: 'POST',
                 headers: {
                     Authorization: "Bearer " + user.user.accessToken,
                 }
             });
             if (response.ok) {
-                // Remove the deleted movie from the list
-                setMovies(prevMovies => prevMovies.filter(movie => movie.id !== movieId));
-                console.log('Movie deleted successfully');
+                console.log('Movie action successful');
+                // Actualizar el estado local de las películas después de la acción
+                const updatedMovies = movies.map(movie => {
+                    if (movie.id === movieId) {
+                        return {
+                            ...movie,
+                            status: status === 'AVAILABLE' ? 'UNAVAILABLE' : 'AVAILABLE' // Corregir el estado de la película
+                        };
+                    }
+                    return movie;
+                });
+                setMovies(updatedMovies);
             } else {
-                console.error('Failed to delete movie');
+                console.error('Failed to perform movie action');
             }
         } catch (error) {
-            console.error('Error deleting movie:', error);
+            console.error('Error performing movie action:', error);
         }
     };
-
+    
     if (loading) {
         return <div>Loading...</div>;
     }
 
     return (
-        <div className="container mx-auto px-4 py-8 rounded-lg shadow-md">
+        <div className="py-2">
             <h1 className="text-3xl font-semibold pb-4 text-gray-800 dark:text-white">Movie List</h1>
             {movies.length === 0 ? (
                 <p className="text-gray-600 dark:text-gray-300">No movies found.</p>
             ) : (
                 <ul className="space-y-4">
                     {movies.map(movie => (
-                        <li key={movie.id} className="flex dark:bg-gray-800 items-center justify-between py-2 px-4 border border-gray-300 dark:border-gray-700 rounded-lg">
+                        <li key={movie.id} className="flex bg-white dark:bg-gray-800 items-center justify-between py-2 px-4 border border-gray-300 dark:border-gray-700 rounded-lg">
                             <div>
                                 <h2 className="text-lg font-semibold text-gray-800 dark:text-white">{movie.title}</h2>
                                 <p className="text-gray-600 dark:text-gray-300">{movie.overview}</p>
                             </div>
                             <div className="flex-shrink-0">
                                 <button onClick={() => handleEdit(movie.id)} className="text-blue-500 hover:text-blue-700 dark:text-blue-400 dark:hover:text-blue-300">Edit</button>
-                                <button onClick={() => handleDelete(movie.id)} className="text-red-500 hover:text-red-700 ml-2 dark:text-red-400 dark:hover:text-red-300">Delete</button>
+                                <button onClick={() => handleAction(movie.id, movie.status)} className={`ml-2 ${
+                                    movie.status === 'AVAILABLE' ? 'text-red-500 hover:text-red-700 dark:text-red-400 dark:hover:text-red-300' : 'text-green-500 hover:text-green-700 dark:text-green-400 dark:hover:text-green-300'
+                                }`}>
+                                    {movie.status === 'AVAILABLE' ? 'Deactivate' : 'Activate'}
+                                </button>
                             </div>
                         </li>
                     ))}

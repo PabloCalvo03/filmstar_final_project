@@ -1,13 +1,7 @@
-import Layout from "../layouts/Layout";
 import MovieForm from "../components/MovieForm";
 
 function CreateMovie() {
-
-  return (
-    <>
-            <MovieForm />
-    </>
-  )
+  return <MovieForm />
 }
 
 export default CreateMovie;

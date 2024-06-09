@@ -40,31 +40,31 @@ const InvitationForm = () => {
     <div className="py-2 flex flex-col justify-center items-center h-screen">
         <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden w-80">
             <div className="p-6">
-            <h2 className="text-2xl font-bold mb-4 text-center dark:text-white">Invitar amigo</h2>
+            <h2 className="text-2xl font-bold mb-4 text-center dark:text-white">Invite friend</h2>
                 <form className="flex flex-col" onSubmit={handleFormSubmit}>
                     <div className="mb-4">
                         <input
                             type="text"
-                            placeholder="Nombre del invitado:"
+                            placeholder="Name of the user:"
                             value={firstname}
                             onChange={(e) => setFirstname(e.target.value)}
-                            className="dark:bg-gray-700 dark:text-white border border-gray-900 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:border-blue-500 w-full"
+                            className="dark:bg-gray-700 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:border-blue-500 w-full"
                         />
                     </div>
                     <div className="mb-4">
                         <input
                             type="text"
-                            placeholder="Apellido del invitado:"
+                            placeholder="Surname of the user:"
                             value={lastname}
                             onChange={(e) => setLastname(e.target.value)}
-                            className="dark:bg-gray-700 dark:text-white border border-gray-900 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:border-blue-500 w-full"
+                            className="dark:bg-gray-700 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:border-blue-500 w-full"
                         />
                     </div>
                     <button
                         type="submit"
                         className="bg-blue-500 hover:bg-blue-600 text-white font-bold py-2 px-4 rounded focus:outline-none focus:bg-blue-600"
                     >
-                        Invitar
+                        Invite
                     </button>
                     {error && <p className="text-red-500">{error}</p>}
                 </form>
@@ -75,7 +75,7 @@ const InvitationForm = () => {
         <div className="flex justify-center items-center mt-4 w-80">
             <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden w-80">
                 <div className="p-6">
-                <p className="text-xl font-semibold text-gray-400 mb-2 text-center">Código de invitación:</p>
+                <p className="text-xl font-semibold text-gray-400 mb-2 text-center">Invitation code:</p>
                     <p className="bg-gray-200 dark:bg-gray-600 dark:text-white text-lg px-4 py-2 rounded-md text-center">{invitationCode}</p>
                 </div>
             </div>

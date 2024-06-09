@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+        "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="com.filmstar.domain.movie.Rating" table="ratings">
+        <id name="id" type="long" access="field">
+            <column name="id" />
+            <generator class="native" />
+        </id>
+        <property name="rating" type="double" access="field">
+            <column name="rating" />
+        </property>
+        <many-to-one name="evaluator" class="com.filmstar.domain.user.User" fetch="join" access="field">
+            <column name="evaluator" not-null="true" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

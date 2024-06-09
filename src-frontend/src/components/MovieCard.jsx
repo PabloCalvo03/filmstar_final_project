@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
+import loadingGif from '../assets/Gif_Loading.gif'; // Ajusta el path según tu estructura de carpetas
 
 const MovieCard = ({ movie }) => {
   const maxLength = 20;
@@ -14,21 +15,16 @@ const MovieCard = ({ movie }) => {
     setImageLoaded(true);
   };
 
-  // Función para verificar si la URL de la imagen contiene el dominio de TMDB
-  const isTMDBImage = (url) => {
-    return url.includes('tmdb.org');
-  };
-
   return (
     <Link to={`/movie/${movie.id}`} className="block w-full h-full">
       <div
-        className={`max-w-sm bg-gray-200 border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700`}
+        className={`max-w-sm border border-gray-200 rounded-lg bg-white shadow dark:bg-gray-800 dark:border-gray-700`}
       >
         {!imageLoaded && (
-          <div className="p-4 text-center">
-            <h5 className="mb-2 text-base sm:text-sm md:text-md lg:text-md font-bold text-gray-900 dark:text-white truncate">
-              {truncatedTitle}
-            </h5>
+          <div className="relative w-full h-64 flex justify-center items-center">
+            <div className="absolute inset-0 flex flex-col justify-center items-center">
+              <img src={loadingGif} alt="Loading..." className="w-16 h-16" />
+            </div>
           </div>
         )}
         <img
@@ -39,20 +35,9 @@ const MovieCard = ({ movie }) => {
         />
         <div className="p-4 text-center">
           <h5 className="mb-2 text-xs sm:text-sm md:text-md lg:text-md font-bold text-gray-900 dark:text-white truncate">
-            {/* Aquí se aplican las clases responsivas con el tamaño del texto de menor a mayor */}
             {truncatedTitle}
           </h5>
         </div>
-        {!imageLoaded && (
-          <div className="w-full h-auto p-4 flex justify-center items-center">
-            <span className="text-gray-600 dark:text-gray-400">
-              {isTMDBImage(movie.posterImg) ? '(Loading...)' : '(Maybe not an TMDB image)'}
-            </span>
-            <span role="img" aria-label="Sad face" className="ml-2 text-xl">
-              😢
-            </span>
-          </div>
-        )}
       </div>
     </Link>
   );

@@ -2,12 +2,35 @@ import ProfilePreview from "./ProfilePreview";
 import { logout } from "../redux/actions/userActions"; // Importa la acción de logout
 import { useDispatch, useSelector } from "react-redux"; // Importa el hook useDispatch
 import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
 
 const Sidebar = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
   const user = useSelector((state) => state.user);
+
+  const [darkMode, setDarkMode] = useState(false);
+
+  const toggleDarkMode = () => {
+    const newDarkMode = !darkMode;
+    setDarkMode(newDarkMode);
+    if (newDarkMode) {
+      document.documentElement.classList.add('dark');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+      localStorage.setItem('theme', 'light');
+    }
+  };
+
+  useEffect(() => {
+    const savedTheme = localStorage.getItem('theme');
+    if (savedTheme === 'dark') {
+      setDarkMode(true);
+      document.documentElement.classList.add('dark');
+    }
+  }, []);
 
   const handleLogout = () => {
     dispatch(logout());
@@ -38,10 +61,10 @@ const Sidebar = () => {
         className="fixed top-0 left-0 z-40 w-64 h-screen transition-transform -translate-x-full sm:translate-x-0"
         aria-label="Sidebar"
       >
-        <div className="h-full px-3 py-4 overflow-y-auto bg-gray-200 dark:bg-gray-800">
-          <ul className="space-y-2 font-medium">
+        <div className="h-full flex flex-col px-3 py-4 overflow-y-auto bg-gray-200 dark:bg-gray-800">
+          <ul className="space-y-2 font-medium flex-grow">
             <li>
-              <ProfilePreview avatar="https://lh3.googleusercontent.com/a/ACg8ocJeIt3SovdYBUm8IQ9PrbVTlcadJl88pY7I0dE714RierFA4Q=s192-c-mo"></ProfilePreview>
+              <ProfilePreview />
             </li>
             <li>
               <a
@@ -60,6 +83,7 @@ const Sidebar = () => {
                 <span className="flex-1 ms-3 whitespace-nowrap">Home</span>
               </a>
             </li>
+            <hr className="border-black dark:border-white"/>
             {user && user.user.role === "ADMIN" && (
               <>
                 <li>
@@ -119,6 +143,27 @@ const Sidebar = () => {
               <a
                 className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
                 onClick={handleInviteFriend}
+              ><svg
+              className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+              aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor"
+              viewBox="0 0 20 20"
+            >
+              <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z" />
+              <path d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z" />
+              <path d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z" />
+            </svg>
+                
+                <span className="flex-1 ms-3 whitespace-nowrap">
+                  Invite friend
+                </span>
+              </a>
+            </li>
+            <li>
+              <a
+                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                onClick={handleLogout}
               >
                 <svg
                   className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
@@ -135,31 +180,48 @@ const Sidebar = () => {
                     d="M1 8h11m0 0L8 4m4 4-4 4m4-11h3a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-3"
                   />
                 </svg>
-                <span className="flex-1 ms-3 whitespace-nowrap">
-                  Invite friend
-                </span>
+                <span className="flex-1 ms-3 whitespace-nowrap">Logout</span>
               </a>
             </li>
-            <li>
-              <a
-                className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
-                onClick={handleLogout}
-              >
+          </ul>
+          <div className="mt-auto pt-4">
+            <a
+              className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group w-100"
+              onClick={toggleDarkMode}
+            >
+              {darkMode ? (
                 <svg
-                  className="flex-shrink-0 w-5 h-5 text-gray-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  className="flex-shrink-0 w-5 h-5 text-yellow-500 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
                   aria-hidden="true"
                   xmlns="http://www.w3.org/2000/svg"
                   fill="currentColor"
                   viewBox="0 0 20 20"
                 >
-                  <path d="M5 5V.13a2.96 2.96 0 0 0-1.293.749L.879 3.707A2.96 2.96 0 0 0 .13 5H5Z" />
-                  <path d="M6.737 11.061a2.961 2.961 0 0 1 .81-1.515l6.117-6.116A4.839 4.839 0 0 1 16 2.141V2a1.97 1.97 0 0 0-1.933-2H7v5a2 2 0 0 1-2 2H0v11a1.969 1.969 0 0 0 1.933 2h12.134A1.97 1.97 0 0 0 16 18v-3.093l-1.546 1.546c-.413.413-.94.695-1.513.81l-3.4.679a2.947 2.947 0 0 1-1.85-.227 2.96 2.96 0 0 1-1.635-3.257l.681-3.397Z" />
-                  <path d="M8.961 16a.93.93 0 0 0 .189-.019l3.4-.679a.961.961 0 0 0 .49-.263l6.118-6.117a2.884 2.884 0 0 0-4.079-4.078l-6.117 6.117a.96.96 0 0 0-.263.491l-.679 3.4A.961.961 0 0 0 8.961 16Zm7.477-9.8a.958.958 0 0 1 .68-.281.961.961 0 0 1 .682 1.644l-.315.315-1.36-1.36.313-.318Zm-5.911 5.911 4.236-4.236 1.359 1.359-4.236 4.237-1.7.339.341-1.699Z" />
+                  <path
+                    fillRule="evenodd"
+                    d="M10 18c-4.4183 0-8-3.5817-8-8s3.5817-8 8-8c4.4183 0 8 3.5817 8 8s-3.5817 8-8 8zM0 10c0 5.5229 4.4771 10 10 10s10-4.4771 10-10S15.5229 0 10 0 0 4.4771 0 10z"
+                    clipRule="evenodd"
+                  />
+                  <circle cx="10" cy="10" r="5" />
                 </svg>
-                <span className="flex-1 ms-3 whitespace-nowrap">Logout</span>
-              </a>
-            </li>
-          </ul>
+              ) : (
+                <svg
+                  className="flex-shrink-0 w-5 h-5 text-gray-900 transition duration-75 dark:text-gray-400 group-hover:text-gray-900 dark:group-hover:text-white"
+                  aria-hidden="true"
+                  xmlns="http://www.w3.org/2000/svg"
+                  fill="currentColor"
+                  viewBox="0 0 20 20"
+                >
+                  <path
+                    fillRule="evenodd"
+                    d="M13.79 10.636l3.535-3.536 1.415 1.415-3.535 3.536-1.415-1.415zM10 18c-4.418 0-8-3.582-8-8 0-3.325 2.05-6.168 4.95-7.333a.75.75 0 0 1 .549.02c.148.06.284.142.404.248.513.413.844.972 1.004 1.581.019.098.089.188.187.248C9.834 4.064 9.917 4 10 4c3.309 0 6 2.691 6 6 0 3.309-2.691 6-6 6zm0-14c-4.418 0-8 3.582-8 8 0 3.157 1.857 5.847 4.513 7.083-.029-.023-.057-.048-.086-.071-.142-.113-.264-.247-.367-.395-.316-.43-.506-.972-.546-1.583-.002-.025-.016-.047-.016-.073C6.006 14.24 6 14.122 6 14c0-3.309 2.691-6 6-6 1.18 0 2.274.428 3.117 1.133l.009-.006.014.014c.3.332.705.518 1.15.518 1.104 0 2-.896 2-2 0-.446-.15-.857-.4-1.191l-.031-.044L15.2 4.564 13.79 3.15 12.376 4.564l.426.426C11.266 4.243 10.648 4 10 4z"
+                    clipRule="evenodd"
+                  />
+                </svg>
+              )}
+              <span className="flex-1 ms-3 whitespace-nowrap">{darkMode ? "Light Mode" : "Dark Mode"}</span>
+            </a>
+          </div>
         </div>
       </aside>
     </>

@@ -33,6 +33,12 @@
             <index column="review_index"/>
             <one-to-many class="com.filmstar.domain.movie.Review"/>
         </list>
+
+        <list name="ratings" table="movie_ratings" cascade="all" access="field">
+            <key column="movie_id"/>
+            <index column="rating_index"/>
+            <one-to-many class="com.filmstar.domain.movie.Rating"/>
+        </list>
           
         <property name="status" column="status" access="field">
 		    <type name="org.hibernate.type.EnumType">

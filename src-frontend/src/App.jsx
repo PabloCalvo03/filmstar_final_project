@@ -30,7 +30,8 @@ function App() {
                   <Route path="/movie/:id" element={<DetailsOfMovie />} />
                   <Route path="/invite-friend" element={<InviteFriend />} />
                   <Route path="/create-movie" element={<ProtectedAdminRoute><CreateMovie /></ProtectedAdminRoute>} />
-                  <Route path="/create-movie/:movieId" element={<ProtectedAdminRoute><MovieEditForm /></ProtectedAdminRoute>} />
+                  <Route path="/create-movie" element={<ProtectedAdminRoute><MovieEditForm /></ProtectedAdminRoute>} />
+                  <Route path="/edit-movie/:movieId" element={<ProtectedAdminRoute><MovieEditForm /></ProtectedAdminRoute>} />
                   <Route path="/admin-movies" element={<ProtectedAdminRoute><AdminMovieCRUD /></ProtectedAdminRoute>} />
                 </Routes>
               </Layout>

@@ -26,16 +26,17 @@ const ProfilePreview = ({ avatar}) => {
       }, [user]);
 
     return (
-        <>{userProfile && (
-            <div className="flex pb-[15px]">
-              <img src={avatar} alt="Avatar" className="w-[35px] rounded-lg" />
-              <div className="flex flex-col ml-[15px] justify-around">
-                <h3 className="font-bold text-[12px] dark:text-white">{userProfile.username}</h3>
-                <p className="text-[#111111] text-[12px] dark:text-white">{userProfile.email}</p>
-              </div>
-            </div>
-          )}
-        </>
+      <>{userProfile && (
+        <div className="flex pb-[15px] items-center">
+          <div className="w-[35px] h-[35px] rounded-full bg-blue-500 flex items-center justify-center text-white text-[20px] font-bold">
+            {userProfile.username.charAt(0)}
+          </div>
+          <div className="flex flex-col ml-[15px] justify-around">
+            <h3 className="font-bold text-[12px] dark:text-white">{userProfile.username}</h3>
+            <p className="text-[#111111] text-[12px] dark:text-white">{userProfile.email}</p>
+          </div>
+        </div>
+      )}</>      
     );
 };
 

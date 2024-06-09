@@ -41,8 +41,8 @@ public class AuthConfig {
 						(requests) ->
 								requests
 										.requestMatchers(HttpMethod.POST, "/api/login", "/api/signup").permitAll()
-										.requestMatchers(HttpMethod.GET, "/api/filmstar/movies").permitAll()
-										.requestMatchers(HttpMethod.GET, "/api/backoffice/movies").hasAnyRole(Role.ADMIN.name())
+										.requestMatchers(HttpMethod.GET, "/api/filmstar/*").hasAnyRole(Role.USER.name(), Role.ADMIN.name())
+										.requestMatchers(HttpMethod.GET, "/api/backoffice/*").hasAnyRole(Role.ADMIN.name())
 										.anyRequest().authenticated());
 		return http.build();
 	}

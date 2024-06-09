@@ -1,62 +1,68 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
-import { v4 as uuidv4 } from 'uuid';
 
 const MovieEditForm = () => {
     const user = useSelector(state => state.user);
     const navigate = useNavigate();
-    const { id } = useParams();
-
+    const { movieId } = useParams();
+    console.log(movieId)
     const [movieData, setMovieData] = useState({
+        id: '',
         title: '',
         overview: '',
         year: '',
         posterImg: '',
-        director: {
-            id: '',
-            name: ''
-        }
+        directorId: ''
     });
     const [errors, setErrors] = useState({});
 
     useEffect(() => {
-        // Aquí realizarías una petición para obtener los datos de la película con el ID especificado
-        // Por simplicidad, aquí solo asignamos valores de ejemplo
-        const sampleMovieData = {
-            title: 'Sample Movie',
-            overview: 'This is a sample movie overview.',
-            year: '2022',
-            posterImg: 'https://image.tmdb.org/t/p/w500/sample_poster.jpg',
-            director: {
-                id: 'sample_director_id2',
-                name: 'Sample Director'
+        if(!user) return;
+        const fetchMovieData = async () => {
+            try {
+                const response = await fetch(`http://localhost:8080/api/filmstar/movies/${movieId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${user.user.accessToken}`
+                    }
+                });
+                if (!response.ok) {
+                    throw new Error('Failed to fetch movie data');
+                }
+                const data = await response.json();
+                console.log(data)
+
+                setMovieData({
+                    id: data.id,
+                    title: data.title,
+                    overview: data.overview,
+                    year: data.year,
+                    posterImg: data.posterImg,
+                    directorId: data.director.id
+                });
+                setOriginalMovieData(data);
+            } catch (error) {
+                console.error(error);
             }
         };
-        setMovieData(sampleMovieData);
-    }, [id]);
+        fetchMovieData()
+    }, [movieId]);
 
     const handleChange = (e) => {
         const { name, value } = e.target;
     
-        // Si el campo es directorId, actualiza solo la propiedad id del objeto director
         if (name === 'directorId') {
             setMovieData({
                 ...movieData,
-                director: {
-                    ...movieData.director,
-                    id: value
-                }
+                directorId: value
             });
         } else {
-            // De lo contrario, actualiza directamente el campo correspondiente en movieData
             setMovieData({
                 ...movieData,
                 [name]: value
             });
         }
     };
-    
 
     const validateForm = () => {
         let newErrors = {};
@@ -85,9 +91,9 @@ const MovieEditForm = () => {
             newErrors.posterImg = 'Poster Image URL must be a valid URL from image.tmdb.org';
         }
 
-        if (!movieData.director.id)
-             newErrors.directorId = 'Director ID is required';
-        else if ()
+        if (!movieData.directorId) {
+            newErrors.directorId = 'Director ID is required';
+        }
 
         setErrors(newErrors);
         return Object.keys(newErrors).length === 0;
@@ -100,9 +106,24 @@ const MovieEditForm = () => {
             return;
         }
 
-        // Aquí realizarías la petición de actualización a tu API
+        try {
+            const response = await fetch("http://localhost:8080/api/backoffice/movies", {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${user.user.accessToken}`
+                },
+                body: JSON.stringify(movieData)
+            });
 
-        navigate('/'); // Redirigir a la página principal después de editar la película
+            if (!response.ok) {
+                throw new Error('Failed to update movie');
+            }
+
+            navigate('/');
+        } catch (error) {
+            console.error(error);
+        }
     };
 
     return (
@@ -121,9 +142,9 @@ const MovieEditForm = () => {
                             type="text"
                             id={field.id}
                             name={field.id}
-                            className="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            value={movieData[field.id]}
+                            className="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder={field.placeholder}
-                            value={field.id === 'directorId' ? movieData.director.id : movieData[field.id]}
                             onChange={handleChange}
                         />
                         {errors[field.id] && <p className="text-red-500 text-xs mt-1">{errors[field.id]}</p>}

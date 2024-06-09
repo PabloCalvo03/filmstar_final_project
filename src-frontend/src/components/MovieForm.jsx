@@ -47,7 +47,8 @@ const MovieForm = () => {
 
         if (!movieData.posterImg) {
             newErrors.posterImg = 'Poster Image URL is required';
-        } else if (!/^https:\/\/image\.tmdb\.org\/t\/p\/w\d+\/.+\.(jpg|jpeg|png)$/.test(movieData.posterImg)) {
+        } else if (!/^https:\/\/image\.tmdb\.org\/t\/p\/w\d+\/.+\.(jpg|jpeg|png)$/.test(movieData.posterImg) && !/^https:\/\/www\.themoviedb\.org\/t\/p\/w\d+\/.+\.(jpg|jpeg|png)$/
+.test(movieData.posterImg)) {
             newErrors.posterImg = 'Poster Image URL must be a valid URL from image.tmdb.org';
         }
 
@@ -104,7 +105,7 @@ const MovieForm = () => {
                             type="text"
                             id={field.id}
                             name={field.id}
-                            className="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+                            className="block w-full p-4 text-sm text-gray-900 border border-gray-300 rounded-lg bg-white focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
                             placeholder={field.placeholder}
                             value={movieData[field.id]}
                             onChange={handleChange}

@@ -15,5 +15,9 @@ public interface MovieRepository {
 
 	Movie findByIdOrFail(MovieId id) throws MovieNotFound;
 
-	List<Movie> findMoviesByTitleStartingWith(Title title);
+	List<Movie> findMoviesByTitleContainingAndAvailable(Title title);
+
+    void deactivateMovie(MovieId movieId) throws Exception;
+
+	void activateMovie(MovieId movieId) throws Exception;
 }

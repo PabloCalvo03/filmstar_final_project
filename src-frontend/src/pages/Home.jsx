@@ -2,12 +2,7 @@ import Layout from "../layouts/Layout";
 import Catalog from "../components/Catalog"
 
 function Home() {
-
-  return (
-    <>
-          <Catalog />
-    </>
-  )
+  return <Catalog />
 }
 
 export default Home;

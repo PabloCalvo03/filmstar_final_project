@@ -54,25 +54,26 @@ const Main = () => {
   };
 
   return (
-    
-      <div className="py-2">
-        <h1 className="text-3xl font-[600] dark:text-white">Explore</h1>
-        <br />
-        <SearchBar by="title" setMovies={setMovies} fetchSearch={fetchSearch}></SearchBar>
-        <br />
-        {isLoading ? (
-          <p>Cargando películas...</p>
+    <div className="py-2">
+      <h1 className="text-3xl font-[600] dark:text-white">Explore</h1>
+      <br />
+      <SearchBar by="title" setMovies={setMovies} fetchSearch={fetchSearch}></SearchBar>
+      <br />
+      {isLoading ? (
+        <p>Loading movies...</p>
+      ) : (
+        movies.length === 0 ? (
+          <p className="text-black dark:text-white">No movies found.</p>
         ) : (
           <div className="grid grid-cols-2 gap-4 lg:grid-cols-5 md:grid-cols-2 justify-items-center">
-            {movies.length === 0 ? (
-              <p>No hay películas disponibles.</p>
-            ) : (
-              movies.map((movie) => <MovieCard movie={movie} key={movie.id}/>)
-            )}
+            {movies.map((movie) => (
+              <MovieCard movie={movie} key={movie.id} />
+            ))}
           </div>
-        )}
-      </div>
+        )
+      )}
+    </div>
   );
-};
+}
 
 export default Main;

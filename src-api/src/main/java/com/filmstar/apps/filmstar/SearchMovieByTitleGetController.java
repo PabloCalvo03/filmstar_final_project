@@ -23,11 +23,9 @@ public class SearchMovieByTitleGetController {
 
     Logger logger = LoggerFactory.getLogger(SearchMovieByTitleGetController.class);
 
-    // Inyecta el servicio de películas para realizar la búsqueda
     @Autowired
     private MovieRepository movieRepository;
 
-    // Maneja las solicitudes GET para buscar películas por título
     @GetMapping
     public List<SerializedMovie> searchMoviesStartingWithTitle(@RequestParam String query) throws ValueError {
     	if(query == "" || query == null || query.length() == 0) {
@@ -38,7 +36,7 @@ public class SearchMovieByTitleGetController {
             logger.info("Buscando películas con título que comienza con: " + query);
 
             // Obtener la lista de películas desde el repositorio
-            List<Movie> movies = movieRepository.findMoviesByTitleStartingWith(new Title(query));
+            List<Movie> movies = movieRepository.findMoviesByTitleContainingAndAvailable(new Title(query));
 
             // Convertir cada Movie a SerializedMovie
             List<SerializedMovie> serializedMovies = movies.stream()

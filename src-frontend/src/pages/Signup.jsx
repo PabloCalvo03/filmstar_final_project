@@ -29,36 +29,36 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen dark:bg-zinc-900 text-white">
-      <div className="bg-gray-800 p-8 rounded-lg shadow-md w-80">
-        <h2 className="text-2xl font-bold mb-4 text-center">Registrarse</h2>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-zinc-900 text-white">
+      <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md w-80">
+        <h2 className="text-2xl font-bold mb-4 text-center text-black dark:text-white">Registrarse</h2>
         <input
           type="email"
           placeholder="Email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
-          className="dark:bg-gray-700 dark:text-white border border-gray-900 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:border-blue-500 w-full"
+          className="dark:bg-gray-700 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:border-blue-500 w-full"
         />
         <input
           type="text"
-          placeholder="Nombre de usuario"
+          placeholder="Name of the user"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
-          className="dark:bg-gray-700 dark:text-white border border-gray-900 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:border-blue-500 w-full"
+          className="dark:bg-gray-700 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:border-blue-500 w-full"
         />
         <input
           type="password"
-          placeholder="Contraseña"
+          placeholder="Password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
-          className="dark:bg-gray-700 dark:text-white border border-gray-900 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:border-blue-500 w-full"
+          className="dark:bg-gray-700 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:border-blue-500 w-full"
         />
         <input
           type="text"
-          placeholder="Código de invitación"
+          placeholder="Invitation code"
           value={invitationCode}
           onChange={(e) => setInvitationCode(e.target.value)}
-          className="dark:bg-gray-700 dark:text-white border border-gray-900 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:border-blue-500 w-full"
+          className="dark:bg-gray-700 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:border-blue-500 w-full"
         />
         {error && <p className="text-red-500 mb-4">{error}</p>}
         <button
