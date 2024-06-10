@@ -4,9 +4,11 @@ import java.util.List;
 import java.util.Optional;
 
 import com.filmstar.domain.movie.*;
-import com.filmstar.domain.shared.ValueError;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Primary;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -20,15 +22,15 @@ public class JpaMovieRepository implements MovieRepository{
 	public void save(Movie movie) {
 		this.movieRepository.save(movie);
 	}
-	
+
 	@Override
-	public List<Movie> findAll() {
-		return this.movieRepository.findAll();
+	public Page<Movie> findAll(Pageable pageable) {
+		return this.movieRepository.findAll(pageable);
 	}
 
 	@Override
-	public List<Movie> findAllAvailable() {
-		return movieRepository.findAllAvailable();
+	public Page<Movie> findAllAvailable(Pageable pageable) {
+		return movieRepository.findAllAvailable(pageable);
 	}
 
 	@Override
@@ -42,8 +44,8 @@ public class JpaMovieRepository implements MovieRepository{
 	}
 
 	@Override
-	public List<Movie> findMoviesByTitleContainingAndAvailable(Title title){
-		return movieRepository.findMoviesByTitleContainingAndAvailable(title.value());
+	public Page<Movie> findMoviesByTitleContainingAndAvailable(Title title, PageRequest pageRequest){
+		return movieRepository.findMoviesByTitleContainingAndAvailable(title.value(), pageRequest);
 	};
 
 	@Override

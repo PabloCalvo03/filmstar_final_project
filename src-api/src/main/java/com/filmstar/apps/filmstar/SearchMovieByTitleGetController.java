@@ -10,6 +10,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,25 +29,39 @@ public class SearchMovieByTitleGetController {
     private MovieRepository movieRepository;
 
     @GetMapping
-    public List<SerializedMovie> searchMoviesStartingWithTitle(@RequestParam String query) throws ValueError {
-    	if(query == "" || query == null || query.length() == 0) {
-    		return movieRepository.findAllAvailable().stream().map(SerializedMovie::from)
-                    .collect(Collectors.toList());
-    	}
-        try {
+    public PaginatedMovieResponse searchMoviesStartingWithTitle(
+            @RequestParam(required = false) String query,
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int size
+    ) throws ValueError {
+        PaginatedMovieResponse response = new PaginatedMovieResponse();
+
+        if (query == null || query.isEmpty()) {
+            // If query is empty or null, return all available movies paginated
+            Page<Movie> moviePage = movieRepository.findAllAvailable(PageRequest.of(page, size));
+            response.setMovies(getPagedSerializedMovies(moviePage));
+        } else {
             logger.info("Buscando películas con título que comienza con: " + query);
-
-            // Obtener la lista de películas desde el repositorio
-            List<Movie> movies = movieRepository.findMoviesByTitleContainingAndAvailable(new Title(query));
-
-            // Convertir cada Movie a SerializedMovie
-            List<SerializedMovie> serializedMovies = movies.stream()
-                    .map(SerializedMovie::from)
-                    .collect(Collectors.toList());
-
-            return serializedMovies;
-        } catch (TitleLenghtNotValid e) {
-            throw new RuntimeException(e);
+            try {
+                // Obtener la lista de películas desde el repositorio paginada
+                Page<Movie> moviePage = movieRepository.findMoviesByTitleContainingAndAvailable(new Title(query), PageRequest.of(page, size));
+                response.setMovies(getPagedSerializedMovies(moviePage));
+            } catch (TitleLenghtNotValid e) {
+                throw new RuntimeException(e);
+            }
         }
+
+        response.setCurrentPage(page);
+        response.setBefore(Math.max(0, page - 1));
+        response.setAfter(page + 1);
+
+        return response;
+    }
+
+    private List<SerializedMovie> getPagedSerializedMovies(Page<Movie> moviePage) {
+        // Convertir cada Movie a SerializedMovie
+        return moviePage.getContent().stream()
+                .map(SerializedMovie::from)
+                .collect(Collectors.toList());
     }
 }

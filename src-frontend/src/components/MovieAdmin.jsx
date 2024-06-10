@@ -8,21 +8,22 @@ const MovieAdmin = () => {
 
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
+    const [currentPage, setCurrentPage] = useState(0);
+    const [hasMore, setHasMore] = useState(true);
 
     useEffect(() => {
         if(!user) return;
-        const fetchMovies = async () => {
+        const fetchMovies = async (page) => {
             try {
-                const response = await fetch('http://localhost:8080/api/backoffice/movies', {
+                const response = await fetch(`http://localhost:8080/api/backoffice/movies?page=${page}&size=10`, {
                     headers: {
                         Authorization: "Bearer " + user.user.accessToken,
                     }
                 });
                 if (response.ok) {
                     const data = await response.json();
-                    console.log(data)
-
-                    setMovies(data);
+                    setMovies(prevMovies => [...prevMovies, ...data.movies]);
+                    setHasMore(data.after !== null);
                 } else {
                     console.error('Failed to fetch movies');
                 }
@@ -33,9 +34,8 @@ const MovieAdmin = () => {
             }
         };
 
-        fetchMovies();
-    }, [user]);
-
+        fetchMovies(currentPage);
+    }, [user, currentPage]);
 
     const handleEdit = (movieId) => {
         navigate(`/edit-movie/${movieId}`);
@@ -54,12 +54,11 @@ const MovieAdmin = () => {
             });
             if (response.ok) {
                 console.log('Movie action successful');
-                // Actualizar el estado local de las películas después de la acción
                 const updatedMovies = movies.map(movie => {
                     if (movie.id === movieId) {
                         return {
                             ...movie,
-                            status: status === 'AVAILABLE' ? 'UNAVAILABLE' : 'AVAILABLE' // Corregir el estado de la película
+                            status: status === 'AVAILABLE' ? 'UNAVAILABLE' : 'AVAILABLE'
                         };
                     }
                     return movie;
@@ -72,8 +71,21 @@ const MovieAdmin = () => {
             console.error('Error performing movie action:', error);
         }
     };
-    
-    if (loading) {
+
+    const handleScroll = () => {
+        if ((window.innerHeight + document.documentElement.scrollTop) >= document.documentElement.offsetHeight - 1) {
+            if (hasMore && !loading) {
+                setCurrentPage(prevPage => prevPage + 1);
+            }
+        }
+    };
+
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => window.removeEventListener('scroll', handleScroll);
+    }, [hasMore, loading]);
+
+    if (loading && movies.length === 0) {
         return <div>Loading...</div>;
     }
 
@@ -100,6 +112,7 @@ const MovieAdmin = () => {
                             </div>
                         </li>
                     ))}
+                    {loading && movies.length > 0 && <div>Loading more movies...</div>}
                 </ul>
             )}
         </div>

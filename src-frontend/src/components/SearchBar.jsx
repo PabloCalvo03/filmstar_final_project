@@ -1,10 +1,9 @@
 import React, { useState, useRef } from "react";
 import { useSelector } from "react-redux";
 
-const SearchBar = ({ setMovies, by, fetchSearch }) => {
-const user = useSelector(state => state.user);
+const SearchBar = ({ by, fetchSearch }) => {
+  const user = useSelector(state => state.user);
   const [query, setQuery] = useState("");
-  const abortControllerRef = useRef(null);
   const typingTimeoutRef = useRef(null);
 
   const handleChange = (event) => {
@@ -15,14 +14,7 @@ const user = useSelector(state => state.user);
     clearTimeout(typingTimeoutRef.current);
 
     typingTimeoutRef.current = setTimeout(() => {
-      if (abortControllerRef.current) {
-        abortControllerRef.current.abort();
-      }
-
-      const abortController = new AbortController();
-      abortControllerRef.current = abortController;
-
-      fetchSearch(inputValue, abortController);
+      fetchSearch(inputValue); // Pasar el valor actual del campo de búsqueda
     }, 300);
   };
 
