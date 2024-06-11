@@ -11,6 +11,9 @@ import CreateMovie from './pages/CreateMovie';
 import AdminMovieCRUD from './pages/AdminMovieCRUD';
 import Layout from './layouts/Layout';
 import MovieEditForm from './components/MovieEditForm';
+import CreateDirector from './pages/CreateDirector';
+import AdminDirectorCRUD from './pages/AdminDirectorCRUD';
+import DirectorEditForm from './components/DirectorEditForm';
 
 function App() {
   return (
@@ -30,9 +33,11 @@ function App() {
                   <Route path="/movie/:id" element={<DetailsOfMovie />} />
                   <Route path="/invite-friend" element={<InviteFriend />} />
                   <Route path="/create-movie" element={<ProtectedAdminRoute><CreateMovie /></ProtectedAdminRoute>} />
-                  <Route path="/create-movie" element={<ProtectedAdminRoute><MovieEditForm /></ProtectedAdminRoute>} />
+                  <Route path="/create-director" element={<ProtectedAdminRoute><CreateDirector /></ProtectedAdminRoute>} />
                   <Route path="/edit-movie/:movieId" element={<ProtectedAdminRoute><MovieEditForm /></ProtectedAdminRoute>} />
+                  <Route path="/edit-director/:directorId" element={<ProtectedAdminRoute><DirectorEditForm /></ProtectedAdminRoute>} />
                   <Route path="/admin-movies" element={<ProtectedAdminRoute><AdminMovieCRUD /></ProtectedAdminRoute>} />
+                  <Route path="/admin-directors" element={<ProtectedAdminRoute><AdminDirectorCRUD /></ProtectedAdminRoute>} />
                 </Routes>
               </Layout>
             </ProtectedRoute>

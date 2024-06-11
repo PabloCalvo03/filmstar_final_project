@@ -4,30 +4,30 @@ import com.filmstar.domain.shared.ValueError;
 
 public class Year {
 
-    private String value;
+    private Integer value;
     
     public Year() {
     	
     }
 
-    public Year(String value) throws ValueError{
+    public Year(Integer value) throws ValueError{
 		ensureIsNotEmpty(value);
     	ensureIsAValidYear(value);
     	this.value = value;
     }
 
-    public String value(){
+    public Integer value(){
         return value;
     }
     
-    private void ensureIsNotEmpty(String value) throws ValueError {
-		if (value == null || value.length() == 0 || value == "") {
+    private void ensureIsNotEmpty(Integer value) throws ValueError {
+		if (value == null) {
 			throw new ValueError(getClass().getSimpleName() + " cannot be null");
 		}
 	}
     
-    private void ensureIsAValidYear(String value) throws ValueError {
-    	if (value.length() < 4) {
+    private void ensureIsAValidYear(Integer value) throws ValueError {
+    	if (value < 1000 || value > 9999) {
 			throw new ValueError(getClass().getSimpleName() + " is not a valid year");
 		}
     }

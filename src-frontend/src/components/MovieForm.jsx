@@ -59,35 +59,38 @@ const MovieForm = () => {
     };
 
     const handleSubmit = async (e) => {
-        e.preventDefault();
+    e.preventDefault();
 
-        if (!validateForm()) {
-            return;
-        }
+    if (!validateForm()) {
+        return;
+    }
 
-        // Generar UUID
-        const id = uuidv4();
+    const yearInt = parseInt(movieData.year);
 
-        const movieDataWithId = { id, ...movieData };
+    const id = uuidv4();
 
-        const response = await fetch('http://localhost:8080/api/backoffice/movies', {
-            method: 'POST',
-            headers: {
-                Authorization: "Bearer " + user.user.accessToken, // Usar el token de usuario en la cabecera de autorización
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(movieDataWithId)
-        });
+    const movieDataWithId = { id, ...movieData, year: yearInt };
+    console.log(movieDataWithId)
 
-        if (response.ok) {
-            const data = await response.json();
-            console.log('Movie created:', data);
-            navigate('/'); 
-        } else {
-            const errorData = await response.json();
-            console.error('Error creating movie:', errorData);
-        }
-    };
+    const response = await fetch('http://localhost:8080/api/backoffice/movies', {
+        method: 'POST',
+        headers: {
+            Authorization: "Bearer " + user.user.accessToken, // Usar el token de usuario en la cabecera de autorización
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(movieDataWithId)
+    });
+
+    if (response.ok) {
+        const data = await response.json();
+        console.log('Movie created:', data);
+        navigate('/'); 
+    } else {
+        const errorData = await response.json();
+        console.error('Error creating movie:', errorData);
+    }
+};
+
 
     return (
         <div className='py-2'>

@@ -1,4 +1,4 @@
-package com.filmstar.domain.movie;
+package com.filmstar.domain.shared;
 
 public enum Status {
 	

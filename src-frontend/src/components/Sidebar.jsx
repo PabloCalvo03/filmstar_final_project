@@ -42,6 +42,10 @@ const Sidebar = () => {
     navigate("/create-movie");
   };
 
+  const handleCreateDirector = () => {
+    navigate("/create-director");
+  };
+
   const handleInviteFriend = () => {
     navigate("/invite-friend");
   };
@@ -53,6 +57,11 @@ const Sidebar = () => {
   const handleAdminMovies = () => {
     navigate("/admin-movies");
   };
+
+  const handleAdminDirectors = () => {
+    navigate("/admin-directors");
+  };
+
 
   return (
     <>
@@ -137,7 +146,60 @@ const Sidebar = () => {
                     </span>
                   </a>
                 </li>
-              </>
+                <hr className="border-black dark:border-white" />
+                <li>
+                  <a
+                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                    onClick={handleCreateDirector}
+                  >
+                    <svg
+                      className="w-5 h-5 text-gray-400 dark:text-grey-400"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="10"
+                      height="20"
+                      fill="currentColor"
+                      viewBox="0 0 24 20"
+                    >
+                      <path
+                        fillRule="evenodd"
+                        d="M7.05 4.05A7 7 0 0 1 19 9c0 2.407-1.197 3.874-2.186 5.084l-.04.048C15.77 15.362 15 16.34 15 18a1 1 0 0 1-1 1h-4a1 1 0 0 1-1-1c0-1.612-.77-2.613-1.78-3.875l-.045-.056C6.193 12.842 5 11.352 5 9a7 7 0 0 1 2.05-4.95ZM9 21a1 1 0 0 1 1-1h4a1 1 0 1 1 0 2h-4a1 1 0 0 1-1-1Zm1.586-13.414A2 2 0 0 1 12 7a1 1 0 1 0 0-2 4 4 0 0 0-4 4 1 1 0 0 0 2 0 2 2 0 0 1 .586-1.414Z"
+                        clipRule="evenodd"
+                      />
+                    </svg>
+
+                    <span className="flex-1 ms-3 whitespace-nowrap">
+                      Create Director
+                    </span>
+                  </a>
+                </li>
+                <li>
+                  <a
+                    className="flex items-center p-2 text-gray-900 rounded-lg dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 group"
+                    onClick={handleAdminDirectors}
+                  >
+                    <svg
+                      className="w-5 h-5 text-gray-400 dark:text-grey-400"
+                      aria-hidden="true"
+                      xmlns="http://www.w3.org/2000/svg"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth={2}
+                        d="M5 13l4 4L19 7"
+                      />
+                    </svg>
+                    <span className="flex-1 ms-3 whitespace-nowrap">
+                      Admin Directors
+                    </span>
+                  </a>
+                </li>
+                <hr className="border-black dark:border-white" />
+                </>
             )}
             <li>
               <a

@@ -13,5 +13,11 @@
         <component name="surname" class="com.filmstar.domain.director.Surname" access="field">
             <property name="value" column="surname" type="string" access="field" />
         </component>
+        <property name="status" column="status" access="field">
+            <type name="org.hibernate.type.EnumType">
+                <param name="enumClass">com.filmstar.domain.shared.Status</param>
+                <param name="useNamed">true</param>
+            </type>
+        </property>
     </class>
 </hibernate-mapping>

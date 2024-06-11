@@ -17,7 +17,7 @@
         </component>
 
         <component name="year" class="com.filmstar.domain.movie.Year" access="field">
-            <property name="value" column="year" type="string" access="field" not-null="true" />
+            <property name="value" column="year" type="integer" access="field" not-null="true" />
         </component>
 
         <component name="posterImg" class="com.filmstar.domain.movie.PosterImg" access="field">
@@ -42,7 +42,7 @@
           
         <property name="status" column="status" access="field">
 		    <type name="org.hibernate.type.EnumType">
-		      <param name="enumClass">com.filmstar.domain.movie.Status</param>
+		      <param name="enumClass">com.filmstar.domain.shared.Status</param>
 		      <param name="useNamed">true</param>
 		    </type>       
 		  </property>

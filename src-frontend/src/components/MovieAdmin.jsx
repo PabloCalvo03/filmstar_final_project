@@ -13,6 +13,7 @@ const MovieAdmin = () => {
 
     useEffect(() => {
         if(!user) return;
+
         const fetchMovies = async (page) => {
             try {
                 const response = await fetch(`http://localhost:8080/api/backoffice/movies?page=${page}&size=10`, {
@@ -20,9 +21,15 @@ const MovieAdmin = () => {
                         Authorization: "Bearer " + user.user.accessToken,
                     }
                 });
+
                 if (response.ok) {
                     const data = await response.json();
-                    setMovies(prevMovies => [...prevMovies, ...data.movies]);
+                    setMovies(prevMovies => {
+                        const newMovies = data.movies.filter(newMovie => 
+                            !prevMovies.some(movie => movie.id === newMovie.id)
+                        );
+                        return [...prevMovies, ...newMovies];
+                    });
                     setHasMore(data.after !== null);
                 } else {
                     console.error('Failed to fetch movies');
@@ -46,7 +53,7 @@ const MovieAdmin = () => {
         if (!confirmAction) return;
     
         try {
-            const response = await fetch(`http://localhost:8080/api/backoffice/movies/${status === 'AVAILABLE' ? 'deactivate' : 'activate'}/${movieId}`, {
+            const response = await fetch(`http://localhost:8080/api/backoffice/movies/${movieId}/${status === 'AVAILABLE' ? 'deactivate' : 'activate'}`, {
                 method: 'POST',
                 headers: {
                     Authorization: "Bearer " + user.user.accessToken,

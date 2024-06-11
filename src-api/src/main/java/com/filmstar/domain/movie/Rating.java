@@ -9,10 +9,10 @@ public class Rating {
 	private User evaluator;
 
 	public Rating() {
-
 	}
 
 	public Rating(double rating, User evaluator) {
+		ensureIsValidRating(rating);
 		this.rating = rating;
 		this.evaluator = evaluator;
 	}
@@ -34,6 +34,7 @@ public class Rating {
 	}
 
 	public void setRating(double rating) {
+		ensureIsValidRating(rating);
 		this.rating = rating;
 	}
 
@@ -41,4 +42,9 @@ public class Rating {
 		this.evaluator = reviewer;
 	}
 
+	private void ensureIsValidRating(double rating) {
+		if (rating < 0 || rating > 10) {
+			throw new IllegalArgumentException("Rating must be between 0 and 10");
+		}
+	}
 }

@@ -9,10 +9,11 @@ public class Review {
 	private User reviewer;
 
 	public Review() {
-
 	}
 
-	public Review(String comment, User reviewer) {
+	public Review(String comment, User reviewer) throws IllegalArgumentException {
+		ensureIsNotEmpty(comment);
+		ensureLengthIsValid(comment);
 		this.comment = comment;
 		this.reviewer = reviewer;
 	}
@@ -33,7 +34,9 @@ public class Review {
 		this.id = id;
 	}
 
-	public void setComment(String comment) {
+	public void setComment(String comment) throws IllegalArgumentException {
+		ensureIsNotEmpty(comment);
+		ensureLengthIsValid(comment);
 		this.comment = comment;
 	}
 
@@ -41,4 +44,15 @@ public class Review {
 		this.reviewer = reviewer;
 	}
 
+	private void ensureIsNotEmpty(String comment) throws IllegalArgumentException {
+		if (comment == null || comment.trim().isEmpty()) {
+			throw new IllegalArgumentException("Comment must not be empty");
+		}
+	}
+
+	private void ensureLengthIsValid(String comment) throws IllegalArgumentException {
+		if (comment.length() > 500) {
+			throw new IllegalArgumentException("Comment must not exceed 500 characters");
+		}
+	}
 }

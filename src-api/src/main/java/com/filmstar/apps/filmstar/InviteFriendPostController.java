@@ -22,11 +22,14 @@ public class InviteFriendPostController {
     private InvitationRepository invitationRepository;
 
     @PostMapping
-    public ResponseEntity<SerializedInvitation> execute(@AuthenticationPrincipal User user,
-                        @RequestBody InviteFriendPostRequest inviteFriendPostRequest){
-    	Invitation invitation = new Invitation(inviteFriendPostRequest.firstname, inviteFriendPostRequest.lastname, user);
-        invitationRepository.save(invitation);
-    	return new ResponseEntity<SerializedInvitation>(SerializedInvitation.from(invitation), HttpStatus.ACCEPTED);
+    public ResponseEntity<?> execute(@AuthenticationPrincipal User user,
+                                     @RequestBody InviteFriendPostRequest inviteFriendPostRequest) {
+        try {
+            Invitation invitation = new Invitation(inviteFriendPostRequest.firstname, inviteFriendPostRequest.lastname, user);
+            invitationRepository.save(invitation);
+            return new ResponseEntity<>(SerializedInvitation.from(invitation), HttpStatus.ACCEPTED);
+        } catch (IllegalArgumentException e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
-
 }

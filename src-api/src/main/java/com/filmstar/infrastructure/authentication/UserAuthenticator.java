@@ -1,13 +1,12 @@
 package com.filmstar.infrastructure.authentication;
 import java.time.Instant;
-import java.util.Date;
 import java.util.Optional;
 
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.filmstar.apps.shared.UserLoginPostRequest;
-import com.filmstar.application.shared.UserResponse;
+import com.filmstar.apps.shared.UserResponse;
 import com.filmstar.domain.user.InvalidAuthPassword;
 import com.filmstar.domain.user.InvalidAuthUsername;
 import com.filmstar.domain.user.User;

@@ -27,7 +27,7 @@ public class QueryMovieListGetController {
 			@RequestParam(defaultValue = "10") int size
 	){
 		PageRequest pageRequest = PageRequest.of(page, size);
-		Page<Movie> moviePage = movieRepository.findAllAvailable(pageRequest);
+		Page<Movie> moviePage = movieRepository.findAll(pageRequest);
 
 		List<SerializedMovie> serializedMovies = moviePage.getContent().stream()
 				.map(SerializedMovie::from)

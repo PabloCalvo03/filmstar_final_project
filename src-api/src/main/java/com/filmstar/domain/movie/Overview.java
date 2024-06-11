@@ -20,7 +20,7 @@ public class Overview implements Serializable {
 	}
 	
 	private void ensureIsNotEmpty(String value) throws ValueError {
-		if (value == null || value.length() == 0 || value == "") {
+		if (value == null || value.isEmpty()) {
 			throw new ValueError(getClass().getSimpleName() + " cannot be null");
 		}
 	}

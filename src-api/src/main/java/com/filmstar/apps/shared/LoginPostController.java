@@ -6,8 +6,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.filmstar.infrastructure.authentication.UserAuthenticator;
-import com.filmstar.application.shared.ErrorResponse;
-import com.filmstar.application.shared.UserResponse;
 import com.filmstar.domain.user.InvalidAuthUsername;
 import com.filmstar.domain.user.InvalidAuthPassword;
 
@@ -31,4 +29,35 @@ public class LoginPostController {
 	    }
 	  }
 
+	public static class ErrorResponse {
+	  Integer code;
+	  String message;
+
+	  public ErrorResponse() {
+
+	  }
+
+	  public ErrorResponse(Integer code, String message) {
+		  this.code = code;
+		  this.message = message;
+	  }
+
+		public Integer getCode() {
+			return code;
+		}
+
+		public String getMessage() {
+			return message;
+		}
+
+		public void setCode(Integer code) {
+			this.code = code;
+		}
+
+		public void setMessage(String message) {
+			this.message = message;
+		}
+
+
+	}
 }

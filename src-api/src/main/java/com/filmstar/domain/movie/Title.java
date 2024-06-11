@@ -24,7 +24,7 @@ public class Title implements Serializable {
 	}
 	
 	private void ensureTitleLengthIsValid(String value) throws TitleLenghtNotValid {
-		if (value.length() > 20) {
+		if (value.length() > 50) {
 			throw new TitleLenghtNotValid();
 		}
 	}

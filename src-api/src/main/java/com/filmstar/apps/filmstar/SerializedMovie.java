@@ -12,14 +12,14 @@ public class SerializedMovie {
 	public String id;
     public String title;
     public String overview;
-	public String year;
+	public Integer year;
 	public String posterImg;
 	public List<Review> reviews;
 	public double averageRating;
 	public SerializedDirector director;
     
     public SerializedMovie(String id, String title, String overview, List<Review> reviews, double averageRating,
-						   String year, String posterImg,
+						   Integer year, String posterImg,
 						   SerializedDirector movieDirector) {
 		this.id = id;
 		this.title = title;

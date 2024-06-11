@@ -2,7 +2,6 @@ package com.filmstar.infrastructure.authentication;
 
 import java.time.Instant;
 import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Optional;
 
 import com.filmstar.domain.user.*;
@@ -10,7 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.filmstar.apps.shared.UserSignupPostRequest;
-import com.filmstar.application.shared.UserResponse;
+import com.filmstar.apps.shared.UserResponse;
 
 @Service
 public class UserRegister {

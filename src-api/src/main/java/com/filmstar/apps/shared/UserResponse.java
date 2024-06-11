@@ -1,4 +1,4 @@
-package com.filmstar.application.shared;
+package com.filmstar.apps.shared;
 
 import java.io.Serializable;
 

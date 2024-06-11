@@ -7,7 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/api/backoffice/movies/activate/{movieId}")
+@RequestMapping("/api/backoffice/movies/{movieId}/activate")
 @CrossOrigin("*")
 public class ActivateMoviePostController {
 

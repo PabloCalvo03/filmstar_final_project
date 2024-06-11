@@ -9,8 +9,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.filmstar.infrastructure.authentication.UserRegister;
-import com.filmstar.application.shared.ErrorResponse;
-import com.filmstar.application.shared.UserResponse;
 import com.filmstar.domain.user.UsernameAlreadyExists;
 
 @RestController
@@ -28,7 +26,7 @@ public class SignupPostController {
 	      return ResponseEntity.ok(userResponse);
 	    } catch (IllegalArgumentException | EmailAlreadyExists | UsernameAlreadyExists | InvitationNotFound | BadInvitation e) {
 	      final HttpStatus httpStatus = HttpStatus.CONFLICT;
-	      final ErrorResponse errorResponse = new ErrorResponse(httpStatus.value(), e.getMessage());
+	      final LoginPostController.ErrorResponse errorResponse = new LoginPostController.ErrorResponse(httpStatus.value(), e.getMessage());
 	      return ResponseEntity.status(httpStatus).body(errorResponse);
 	    }
 	}

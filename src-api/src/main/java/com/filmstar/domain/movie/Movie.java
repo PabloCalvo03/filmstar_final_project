@@ -1,6 +1,7 @@
 package com.filmstar.domain.movie;
 
 import com.filmstar.domain.director.Director;
+import com.filmstar.domain.shared.Status;
 import com.filmstar.domain.user.User;
 
 import java.util.ArrayList;

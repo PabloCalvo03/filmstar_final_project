@@ -15,6 +15,7 @@ public class Invitation {
     }
 
     public Invitation(String firstName, String lastName, User inviter) {
+        validate(firstName, lastName);
         this.code = generateCode(firstName, lastName);
         this.expirationDate = LocalDateTime.now().plusDays(3);
         this.used = false; // Por defecto, la invitación no está aceptada
@@ -66,5 +67,24 @@ public class Invitation {
         Random random = new Random();
         String randomDigits = String.format("%06d", random.nextInt(1000000)); // Genera 6 dígitos aleatorios
         return firstName.toLowerCase() + "_" + lastName.toLowerCase() + "_" + randomDigits;
+    }
+
+    // Método privado para validar nombres
+    private void validate(String firstName, String lastName) {
+        if (firstName == null || firstName.trim().isEmpty()) {
+            throw new IllegalArgumentException("First name must not be empty");
+        }
+
+        if (lastName == null || lastName.trim().isEmpty()) {
+            throw new IllegalArgumentException("Last name must not be empty");
+        }
+
+        if (!firstName.matches("[a-zA-Z]+")) {
+            throw new IllegalArgumentException("First name must contain only letters");
+        }
+
+        if (!lastName.matches("[a-zA-Z]+")) {
+            throw new IllegalArgumentException("Last name must contain only letters");
+        }
     }
 }

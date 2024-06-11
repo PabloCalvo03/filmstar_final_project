@@ -29,7 +29,7 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-zinc-900 text-white">
+    <div className="flex items-center justify-center min-h-screen bg-gray-100 dark:bg-zinc-900 dark:text-white">
       <div className="bg-white dark:bg-gray-800 p-8 rounded-lg shadow-md w-80">
         <h2 className="text-2xl font-bold mb-4 text-center text-black dark:text-white">Registrarse</h2>
         <input
