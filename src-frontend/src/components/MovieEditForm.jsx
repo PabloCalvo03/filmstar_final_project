@@ -87,7 +87,8 @@ const MovieEditForm = () => {
 
         if (!movieData.posterImg) {
             newErrors.posterImg = 'Poster Image URL is required';
-        } else if (!/^https:\/\/image\.tmdb\.org\/t\/p\/w\d+\/.+\.(jpg|jpeg|png)$/.test(movieData.posterImg)) {
+        } else if (!/^https:\/\/image\.tmdb\.org\/t\/p\/w\d+\/.+\.(jpg|jpeg|png)$/.test(movieData.posterImg) && !/^https:\/\/www\.themoviedb\.org\/t\/p\/w\d+\/.+\.(jpg|jpeg|png)$/
+        .test(movieData.posterImg)) {
             newErrors.posterImg = 'Poster Image URL must be a valid URL from image.tmdb.org';
         }
 
