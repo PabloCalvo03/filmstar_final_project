@@ -15,9 +15,8 @@ El objetivo principal de FilmStar es proporcionar una plataforma cerrada y exclu
 
 ## Estructura del Proyecto
 
-En este apartado el alumno explicará el contenido del repositorio y de todas las carpetas relevantes del mismo. Para facilitar la gestión de la entrega, todo el código y documentación debe estar en este repositorio.
-
-Por lo anterior, un proyecto que contenga un Frontend en una tecnología o framework (por ejemplo Angular) y una API REST en otra tecnología o framework (Springboot, Express) deberá tener la siguiente estructura de directorios en el repositorio de entrega:
+En la api estoy usando la estructura de carpetas propia de Arquitectura hexagonal y DDD (domain, application, infrastructure), separando tambien los controladores en una carpeta apps.
+En el frontend estoy siguiendo la tipica estructura de carpetas que se sigue en todos los proyectos frontend.
 
 - src-api
   - src
