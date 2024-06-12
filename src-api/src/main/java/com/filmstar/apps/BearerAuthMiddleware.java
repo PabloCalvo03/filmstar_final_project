@@ -18,26 +18,34 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
+/**
+ * This class implements a filter to intercept incoming HTTP requests and authenticate them using bearer tokens.
+ */
 public class BearerAuthMiddleware extends OncePerRequestFilter {
 
 	private AuthenticationTokenValidator authenticationTokenValidator;
 
+	/**
+	 * Constructs a BearerAuthMiddleware with the provided AuthenticationTokenValidator.
+	 *
+	 * @param authenticationTokenValidator the token validator
+	 */
 	public BearerAuthMiddleware(AuthenticationTokenValidator authenticationTokenValidator) {
 		this.authenticationTokenValidator = authenticationTokenValidator;
 	}
 
 	@Override
 	protected void doFilterInternal(final HttpServletRequest httpServletRequest,
-			final HttpServletResponse httpServletResponse, final FilterChain filterChain)
+									final HttpServletResponse httpServletResponse, final FilterChain filterChain)
 			throws ServletException, IOException {
-		
+
 		final String header = httpServletRequest.getHeader(HttpHeaders.AUTHORIZATION);
 
 		if (header == null) {
 			filterChain.doFilter(httpServletRequest, httpServletResponse);
 			return;
 		}
-		
+
 		final String[] authElements = header.split(" ");
 
 		if (authElements.length != 2 || "Bearer".equals(authElements[0]) == false) {
@@ -47,11 +55,11 @@ public class BearerAuthMiddleware extends OncePerRequestFilter {
 
 		try {
 			final User user = authenticationTokenValidator.validateToken(authElements[1]);
-	        Collection<SimpleGrantedAuthority> roles =
+			Collection<SimpleGrantedAuthority> roles =
 					Collections.singleton(new SimpleGrantedAuthority("ROLE_" + user.role().name()));
 
 			final UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(
-					user, 
+					user,
 					null,
 					roles
 			);

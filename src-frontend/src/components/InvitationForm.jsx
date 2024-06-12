@@ -47,7 +47,7 @@ const InvitationForm = () => {
         }
 
         try {
-            const response = await fetch("http://localhost:8080/api/movierecords/invite-friend", {
+            const response = await fetch("http://localhost:8080/api/filmstar/invite-friend", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",

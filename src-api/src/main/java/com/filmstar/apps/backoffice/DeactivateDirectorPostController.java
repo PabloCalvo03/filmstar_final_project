@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * REST controller for deactivating directors in the back office system.
+ */
 @RestController
 @RequestMapping("/api/backoffice/directors/{directorId}/deactivate")
 @CrossOrigin("*")
@@ -15,6 +18,13 @@ public class DeactivateDirectorPostController {
     @Autowired
     private DirectorRepository directorRepository;
 
+    /**
+     * Deactivates a director with the given director ID.
+     *
+     * @param directorId the ID of the director to deactivate
+     * @return a ResponseEntity with a success message and HTTP status 200 if the deactivation is successful,
+     *         or an error message and HTTP status 500 if the deactivation fails
+     */
     @PostMapping
     public ResponseEntity<String> deactivateDirector(@PathVariable String directorId) {
         try {

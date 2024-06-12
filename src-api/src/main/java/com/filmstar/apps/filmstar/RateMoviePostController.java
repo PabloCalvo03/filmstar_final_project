@@ -10,14 +10,26 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
 
+/**
+ * REST controller for rating movies in the Filmstar application.
+ */
 @RestController
 @RequestMapping(value="/api/filmstar/movies/{id}/ratings")
 @CrossOrigin("*")
 public class RateMoviePostController {
-	
+
 	@Autowired
 	private MovieRepository movieRepository;
 
+	/**
+	 * Rates a movie with the provided rating value.
+	 *
+	 * @param evaluator     the authenticated user rating the movie
+	 * @param id            the ID of the movie to rate
+	 * @param ratingRequest the request body containing the rating value
+	 * @return a ResponseEntity with the serialized movie and HTTP status 202 if the rating is successful
+	 * @throws Exception if the movie with the given ID is not found
+	 */
 	@PostMapping
 	public ResponseEntity<SerializedMovie> execute(@AuthenticationPrincipal User evaluator, @PathVariable String id, @RequestBody RatingMoviePostRequest ratingRequest) throws Exception {
 		Movie movie = movieRepository.findByIdOrFail(new MovieId(id));
@@ -26,12 +38,12 @@ public class RateMoviePostController {
 		if (existingRating.isPresent()) {
 			existingRating.get().setRating(ratingRequest.rating);
 		} else {
-			// Si el usuario no ha votado, agrega un nuevo rating
+			// If the user has not rated, add a new rating
 			movie.addRating(new Rating(ratingRequest.rating, evaluator));
 		}
 
 		movieRepository.save(movie);
 		return new ResponseEntity<>(SerializedMovie.from(movie), HttpStatus.ACCEPTED);
 	}
-	
+
 }

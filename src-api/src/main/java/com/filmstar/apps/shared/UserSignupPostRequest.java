@@ -1,48 +1,55 @@
 package com.filmstar.apps.shared;
 
+/**
+ * Class representing a user signup request.
+ */
 public class UserSignupPostRequest {
-    String email;
-  String username;
-  String password;
+    // Attributes of the user signup request
+    private String email; // User's email
+    private String username; // User's username
+    private String password; // User's password
+    private String invitationCode; // Invitation code for signup
 
-  String invitationCode;
-  
-  public UserSignupPostRequest() {
-	  
-  }
-  
-  public UserSignupPostRequest(String email, String username, String password, String invitationCode) {
-      this.email = email;
-	  this.username = username;
-	  this.password = password;
-      this.invitationCode = invitationCode;
-  }
+    // Constructors
+    public UserSignupPostRequest() {
+    }
 
-public String getUsername() {
-	return username;
-}
+    public UserSignupPostRequest(String email, String username, String password, String invitationCode) {
+        this.email = email;
+        this.username = username;
+        this.password = password;
+        this.invitationCode = invitationCode;
+    }
 
-public String getPassword() {
-	return password;
-}
+    // Accessor methods to get and set attribute values
+    public String getUsername() {
+        return username;
+    }
 
-public String getEmail() { return email; }
+    public String getPassword() {
+        return password;
+    }
 
-public void setUsername(String username) {
-	this.username = username;
-}
+    public String getEmail() {
+        return email;
+    }
 
-public void setPassword(String password) {
-	this.password = password;
-}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-public void setEmail(String email) {
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public void setEmail(String email) {
         this.email = email;
     }
 
     public String getInvitationCode() {
         return invitationCode;
     }
+
     public void setInvitationCode(String invitationCode) {
         this.invitationCode = invitationCode;
     }

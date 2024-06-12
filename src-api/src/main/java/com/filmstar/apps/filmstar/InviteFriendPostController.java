@@ -12,15 +12,26 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * REST controller for inviting a friend in the Filmstar application.
+ */
 @RestController
 @CrossOrigin("*")
-@RequestMapping(value = "/api/movierecords/invite-friend")
-@Qualifier("movierecords")
+@RequestMapping(value = "/api/filmstar/invite-friend")
+@Qualifier("filmstar")
 public class InviteFriendPostController {
 
     @Autowired
     private InvitationRepository invitationRepository;
 
+    /**
+     * Invites a friend to the Filmstar application.
+     *
+     * @param user the authenticated user sending the invitation
+     * @param inviteFriendPostRequest the request containing the friend's first name and last name
+     * @return a ResponseEntity with the serialized invitation and HTTP status 202 if the invitation is successful,
+     *         or an error message and HTTP status 400 if the request is invalid
+     */
     @PostMapping
     public ResponseEntity<?> execute(@AuthenticationPrincipal User user,
                                      @RequestBody InviteFriendPostRequest inviteFriendPostRequest) {

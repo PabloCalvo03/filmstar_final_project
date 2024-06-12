@@ -17,17 +17,29 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.stream.Collectors;
 
+/**
+ * Controller for searching movies by title in the Filmstar application.
+ */
 @RestController
 @CrossOrigin("*")
 @RequestMapping(value = "/api/filmstar/movies/query")
 @Qualifier("filmstar")
 public class SearchMovieByTitleGetController {
 
-    Logger logger = LoggerFactory.getLogger(SearchMovieByTitleGetController.class);
+    private static final Logger logger = LoggerFactory.getLogger(SearchMovieByTitleGetController.class);
 
     @Autowired
     private MovieRepository movieRepository;
 
+    /**
+     * Searches for movies starting with the specified title.
+     *
+     * @param query the title to search for
+     * @param page  the page number
+     * @param size  the number of items per page
+     * @return a PaginatedMovieResponse containing the search results
+     * @throws ValueError if the provided title length is not valid
+     */
     @GetMapping
     public PaginatedMovieResponse searchMoviesStartingWithTitle(
             @RequestParam(required = false) String query,
@@ -41,9 +53,9 @@ public class SearchMovieByTitleGetController {
             Page<Movie> moviePage = movieRepository.findAllAvailable(PageRequest.of(page, size));
             response.setMovies(getPagedSerializedMovies(moviePage));
         } else {
-            logger.info("Buscando películas con título que comienza con: " + query);
+            logger.info("Searching for movies with title starting with: " + query);
             try {
-                // Obtener la lista de películas desde el repositorio paginada
+                // Get the list of movies from the repository paginated
                 Page<Movie> moviePage = movieRepository.findMoviesByTitleContainingAndAvailable(new Title(query), PageRequest.of(page, size));
                 response.setMovies(getPagedSerializedMovies(moviePage));
             } catch (TitleLenghtNotValid e) {
@@ -58,8 +70,14 @@ public class SearchMovieByTitleGetController {
         return response;
     }
 
+    /**
+     * Converts a Page of Movie objects to a list of SerializedMovie objects.
+     *
+     * @param moviePage the Page of Movie objects
+     * @return a list of SerializedMovie objects
+     */
     private List<SerializedMovie> getPagedSerializedMovies(Page<Movie> moviePage) {
-        // Convertir cada Movie a SerializedMovie
+        // Convert each Movie to SerializedMovie
         return moviePage.getContent().stream()
                 .map(SerializedMovie::from)
                 .collect(Collectors.toList());

@@ -7,6 +7,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * REST controller for activating directors.
+ */
 @RestController
 @RequestMapping("/api/backoffice/directors/{directorId}/activate")
 @CrossOrigin("*")
@@ -15,6 +18,13 @@ public class ActivateDirectorPostController {
     @Autowired
     private DirectorRepository directorRepository;
 
+    /**
+     * Activates a director with the given director ID.
+     *
+     * @param directorId the ID of the director to activate
+     * @return a ResponseEntity with a success message and HTTP status 200 if the activation is successful,
+     *         or an error message and HTTP status 500 if the activation fails
+     */
     @PostMapping
     public ResponseEntity<String> activateDirector(@PathVariable String directorId) {
         try {

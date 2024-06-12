@@ -2,11 +2,16 @@ package com.filmstar.apps.shared;
 
 import java.io.Serializable;
 
+/**
+ * Class representing a user response.
+ */
 public class UserResponse implements Serializable {
-	private String accessToken;
-	private String expirationDate;
-	private String role;
+	// Attributes of the user response
+	private String accessToken; // Access token
+	private String expirationDate; // Expiration date of the token
+	private String role; // Role of the user
 
+	// Constructors
 	public UserResponse() {
 	}
 
@@ -16,7 +21,7 @@ public class UserResponse implements Serializable {
 		this.role = role;
 	}
 
-
+	// Accessor methods to get and set attribute values
 	public String getAccessToken() {
 		return accessToken;
 	}
@@ -40,5 +45,4 @@ public class UserResponse implements Serializable {
 	public void setRole(String role) {
 		this.role = role;
 	}
-
 }

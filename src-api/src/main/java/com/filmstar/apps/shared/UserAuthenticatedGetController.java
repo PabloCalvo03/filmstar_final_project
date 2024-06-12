@@ -12,13 +12,24 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
+/**
+ * REST controller for retrieving authenticated user details.
+ */
 @RestController
 @RequestMapping(value = "/api/users/me")
 @CrossOrigin("*")
 public class UserAuthenticatedGetController {
 
+        /**
+         * Retrieves details of the authenticated user.
+         *
+         * @param user the authenticated user
+         * @return a ResponseEntity with the authenticated user details if successful,
+         *         or an error message and HTTP status 404 (Not Found) if the user is not found
+         */
         @GetMapping
         public ResponseEntity<?> getUser(@AuthenticationPrincipal User user) {
-                return new ResponseEntity<>(SerializedUser.from(user), HttpStatus.OK);
+                SerializedUser serializedUser = SerializedUser.from(user);
+                return new ResponseEntity<>(serializedUser, HttpStatus.OK);
         }
 }
