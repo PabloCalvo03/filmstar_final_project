@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.filmstar.apps.shared.UserSignupPostRequest;
 import com.filmstar.apps.shared.UserResponse;
-
+import com.filmstar.domain.user.InvitationRepository;
 /**
  * Service class for registering new users.
  */

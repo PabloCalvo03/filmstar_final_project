@@ -74,7 +74,7 @@ const DirectorEditForm = () => {
 
         try {
             const response = await fetch(`http://localhost:8080/api/backoffice/directors`, {
-                method: 'POST', 
+                method: 'PUT', 
                 headers: {
                     'Content-Type': 'application/json',
                     'Authorization': `Bearer ${user.user.accessToken}`

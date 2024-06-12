@@ -1,12 +1,13 @@
 package com.filmstar.domain.user;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Random;
 
 /**
  * Represents an invitation to join the platform.
  */
-public class Invitation {
+public class Invitation implements Serializable {
 
     /**
      * The unique identifier for the invitation.
@@ -46,6 +47,10 @@ public class Invitation {
         this.expirationDate = LocalDateTime.now().plusDays(3);
         this.used = false; // By default, the invitation is not accepted
         this.inviter = inviter;
+    }
+
+    public Invitation(){
+
     }
 
     /**

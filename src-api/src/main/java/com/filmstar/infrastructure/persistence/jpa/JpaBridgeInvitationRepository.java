@@ -28,4 +28,5 @@ public interface JpaBridgeInvitationRepository extends JpaRepository<Invitation,
      * @return the saved invitation
      */
     Invitation save(Invitation invitation);
+
 }

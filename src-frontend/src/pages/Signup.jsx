@@ -8,8 +8,21 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [invitationCode, setInvitationCode] = useState('');
   const [error, setError] = useState('');
+  const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const validateForm = () => {
+    if (!email || !username || !password || !invitationCode) {
+      setError('Por favor, complete todos los campos.');
+      return false;
+    }
+    return true;
+  };
 
   const handleSignup = async () => {
+    if (!validateForm()) return;
+
+    setIsSubmitting(true);
+
     try {
       const response = await fetch('http://localhost:8080/api/signup', {
         method: 'POST',
@@ -20,11 +33,13 @@ const Signup = () => {
       });
 
       if (!response.ok) {
-        throw new Error('Credenciales inválidas');
+        throw new Error('Invalid code invitation');
       }
       navigate('/login');
     } catch (error) {
       setError(error.message);
+    } finally {
+      setIsSubmitting(false);
     }
   };
 
@@ -41,21 +56,21 @@ const Signup = () => {
         />
         <input
           type="text"
-          placeholder="Name of the user"
+          placeholder="Nombre de usuario"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
           className="dark:bg-gray-700 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:border-blue-500 w-full"
         />
         <input
           type="password"
-          placeholder="Password"
+          placeholder="Contraseña"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
           className="dark:bg-gray-700 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:border-blue-500 w-full"
         />
         <input
           type="text"
-          placeholder="Invitation code"
+          placeholder="Código de invitación"
           value={invitationCode}
           onChange={(e) => setInvitationCode(e.target.value)}
           className="dark:bg-gray-700 dark:text-white border border-gray-300 dark:border-gray-700 rounded-lg px-3 py-2 mb-4 focus:outline-none focus:border-blue-500 w-full"
@@ -64,11 +79,12 @@ const Signup = () => {
         <button
           onClick={handleSignup}
           className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600 focus:outline-none focus:bg-blue-600 w-full"
+          disabled={isSubmitting}
         >
-          Registrarse
+          {isSubmitting ? 'Registrando...' : 'Registrarse'}
         </button>
         <div className="mt-4 text-center">
-          <Link to="/login" className="text-blue-400 hover:underline">Si ya tienes cuenta, inicia sesión</Link>
+          <Link to="/login" className="text-blue-400 hover:underline">¿Ya tienes una cuenta? Inicia sesión</Link>
         </div>
       </div>
     </div>
