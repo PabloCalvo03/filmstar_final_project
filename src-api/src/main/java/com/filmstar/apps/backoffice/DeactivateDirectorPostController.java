@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * REST controller for deactivating directors in the back office system.
+ * REST controller for deactivating directors.
  */
 @RestController
 @RequestMapping("/api/backoffice/directors/{directorId}/deactivate")

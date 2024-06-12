@@ -19,7 +19,7 @@ import com.filmstar.domain.movie.Movie;
 import com.filmstar.domain.movie.MovieRepository;
 
 /**
- * REST controller for creating movies in the back office system.
+ * REST controller for creating movies.
  */
 @RestController
 @RequestMapping("/api/backoffice/movies")

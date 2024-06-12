@@ -8,7 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 /**
- * REST controller for deactivating movies in the back office system.
+ * REST controller for deactivating movies.
  */
 @RestController
 @RequestMapping("/api/backoffice/movies/{movieId}/deactivate")
