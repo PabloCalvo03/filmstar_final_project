@@ -11,13 +11,27 @@ import com.filmstar.domain.user.User;
 import com.filmstar.domain.user.UserId;
 import com.filmstar.domain.user.Username;
 
+/**
+ * JPA repository for users.
+ */
 @Repository
-public interface JpaBridgeUserRepository extends JpaRepository<User, UserId>{
+public interface JpaBridgeUserRepository extends JpaRepository<User, UserId> {
 
-	@Query("SELECT u FROM User u WHERE u.username = ?1")
+    /**
+     * Finds a user by their username.
+     *
+     * @param username the username to search for
+     * @return an optional containing the user if found, or an empty optional if not found
+     */
+    @Query("SELECT u FROM User u WHERE u.username =?1")
     Optional<User> findByUsername(Username username);
 
-    @Query("SELECT u FROM User u WHERE u.email = ?1")
+    /**
+     * Finds a user by their email.
+     *
+     * @param email the email to search for
+     * @return an optional containing the user if found, or an empty optional if not found
+     */
+    @Query("SELECT u FROM User u WHERE u.email =?1")
     Optional<User> findByEmail(Email email);
-
 }

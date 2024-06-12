@@ -1,9 +1,14 @@
 package com.filmstar.domain.user;
 
-public class BadInvitation extends Exception{
+/**
+ * Represents an exception that occurs when an invitation is no longer valid.
+ */
+public class BadInvitation extends Exception {
 
-	public BadInvitation() {
+    /**
+     * Constructs a new BadInvitation exception with a default error message.
+     */
+    public BadInvitation() {
         super("La invitacion proporcionada ya no es valida");
     }
-
 }

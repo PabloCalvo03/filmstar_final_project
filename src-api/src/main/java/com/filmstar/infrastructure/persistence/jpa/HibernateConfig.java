@@ -9,9 +9,18 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean;
 import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
 
+/**
+ * Configuration class for Hibernate.
+ */
 @Configuration
 public class HibernateConfig {
 
+    /**
+     * Creates a bean for the entity manager factory.
+     *
+     * @param dataSource data source for the entity manager factory
+     * @return entity manager factory bean
+     */
     @Bean
     public LocalContainerEntityManagerFactoryBean entityManagerFactory(DataSource dataSource) {
         LocalContainerEntityManagerFactoryBean entityManagerFactory = new LocalContainerEntityManagerFactoryBean();
@@ -23,9 +32,14 @@ public class HibernateConfig {
         return entityManagerFactory;
     }
 
+    /**
+     * Returns Hibernate properties.
+     *
+     * @return Hibernate properties
+     */
     private Properties hibernateProperties() {
         Properties properties = new Properties();
-        properties.setProperty("hibernate.hbm2ddl.auto", "update"); 
+        properties.setProperty("hibernate.hbm2ddl.auto", "update");
         return properties;
     }
 }

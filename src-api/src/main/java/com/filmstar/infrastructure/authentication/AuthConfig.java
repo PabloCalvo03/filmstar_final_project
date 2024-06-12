@@ -19,16 +19,34 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import java.util.Arrays;
 
+/**
+ * Configuration class for authentication and security settings.
+ */
 @Configuration
 @EnableWebSecurity
 public class AuthConfig {
-	
+
+	/**
+	 * Authentication token validator instance.
+	 */
 	private AuthenticationTokenValidator authenticationTokenValidator;
-	
+
+	/**
+	 * Constructor for AuthConfig.
+	 *
+	 * @param authenticationTokenValidator the authentication token validator instance
+	 */
 	public AuthConfig(AuthenticationTokenValidator authenticationTokenValidator) {
 		this.authenticationTokenValidator = authenticationTokenValidator;
 	}
 
+	/**
+	 * Bean for security filter chain configuration.
+	 *
+	 * @param http the HttpSecurity instance
+	 * @return the configured SecurityFilterChain
+	 * @throws Exception if an error occurs during configuration
+	 */
 	@Bean
 	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.cors().and()
@@ -47,7 +65,6 @@ public class AuthConfig {
 		return http.build();
 	}
 
-	
+
 
 }
-
