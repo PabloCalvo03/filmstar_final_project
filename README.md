@@ -42,10 +42,34 @@ Por lo anterior, un proyecto que contenga un Frontend en una tecnología o frame
 - docs
 - README.md
 
-En el caso anterior, si se quiere desplegar de forma automatizada a partir del control de versiones, lo habitual es que estén los dos proyectos en repositorios separados. Por lo que se deberá configurar el despliegue automático para indicarle la raíz del código fuente de cada proyecto (si es posible) o hacer dos folks del repositorio principal uno para la API y otro para el frontend y adaptar los directorios para poder realizar el despliegue automático.
+### Ejecución del proyecto con Docker en Linux y Mac
 
-En un proyecto monolítico (tecnología servidor: Springboot, Django, Express, PHP,... con un sistema de templates propio para el frontend: Thymeleaf, jinja, ejs,...) deberá tener la siguiente estructura en el repositorio de entrega:
+1. Asegúrate de tener Docker instalado en tu sistema Unix. Puedes verificar si está instalado ejecutando `docker --version` en tu terminal. Si no está instalado, puedes seguir las [instrucciones de instalación](https://docs.docker.com/get-docker/) en el sitio web oficial de Docker.
 
-- src
-- docs
-- README.md
+2. Descarga o clona el proyecto.
+
+3. Abre una terminal y navega hasta el directorio raíz del proyecto utilizando el comando `cd`.
+
+4. Una vez en el directorio del proyecto, navega hacia src-api y ejecuta el comando `make start`.
+   
+5. Con el contenedor corriendo, habra fallado ya que no existe base de datos, deberas hacer `make migrate`.
+   
+6. Tras esto lanza de nuevo `make start` y con esto ya tendríamos el backend corriendo.
+   
+7. Ahora ve hacia atras y metete en src-frontend y igual, haz `make start`.
+   
+8. Y ya estaría todo listo para probar!
+
+El `Makefile` es lo que uso para hacer make... es para poner alias a los comandos y poder hacer comandos encadenados de forma muy simple
+
+### Ejecución del proyecto con Docker en Windows
+
+1. Asegúrate de tener Docker instalado en tu sistema Unix. Puedes verificar si está instalado ejecutando `docker --version` en tu terminal. Si no está instalado, puedes seguir las [instrucciones de instalación](https://docs.docker.com/get-docker/) en el sitio web oficial de Docker.
+
+2. Descarga o clona el proyecto.
+
+3. Abre una terminal y navega hasta el directorio raíz del proyecto utilizando el comando `cd`.
+
+4. Una vez en el directorio del proyecto, navega hacia src-api y ejecuta el comando `docker compose up --build`.
+
+5. Con el contenedor corriendo, habra fallado ya que no existe base de datos, deberas hacer `docker exec -i src-api-mysqldb-1 mysql -u root -proot filmstar_db < ./fixtures/fixture.sql`.
