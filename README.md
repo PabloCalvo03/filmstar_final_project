@@ -1,38 +1,17 @@
-En este repositorio centralizaremos toda la información relativa a los **Proyectos de Desarrollo de Aplicaciones Web del I.E.S Alixar**.
-Al continuación encontraremos los **apellidos y nombre** del alumno/a junto al **título de su proyecto**. El enlace nos dará acceso al repositorio del proyecto (no a la página GitHub del usuario).
+# FilmStar
 
-En este repositorio se debe incluir la documentación especificada en [Requerimientos y criterios a seguir en el desarrollo de los proyectos](https://github.com/iesalixar/plantilla_proyecto_iesalixar/wiki/a.---Criterios-comunes-para-todos-los-proyectos), así como las indicaciones que el tutor haya podido ir a realizando a lo largo del desarrollo del mismo.
-
-El desarrollo de toda Aplicación Web requiere seguir un [proceso estructurado](https://github.com/iesalixar/plantilla_proyecto_iesalixar/wiki/w1.--PROCESO-ESTRUCTURADO-PARA-DESARROLLO-DE-APLICACIONES-WEB), este  de contenido de la wiki te puede ayudar.
-
-
----
-
-**Los párrafos anteriores son informativos y no deben aparecer en el reposotirio de los alumnos.**
-
----
-
-# Título del Proyecto
-
-#### Curso Escolar 20XX-20XX
-#### Autor: [Nombre del alumno autor](Enlace a su cuenta de gitHub)
-#### Tutor: [Nombre del profesor tutor](Enlace a su cuenta de gitHub)
-#### Fecha de Inicio: DD-MM-YYYY
-#### Fecha de Finalización: DD-MM-YYYY
+#### Curso Escolar 2023-2024
+#### Autor: [Pablo Calvo Jiménez](https://github.com/PabloCalvo03)
+#### Tutor: [Antonio Gabriel Gonzalez Casado](https://github.com/antonio-gabriel-gonzalez-casado)
+#### Fecha de Inicio: 15-03-2024
+#### Fecha de Finalización: 12-06-2024
 
 ## Breve descripción del proyecto
 
-Si ya tienes una idea para tu aplicación, explícala brevemente. Si no es así, lo que realmente necesitas es **buscar un problema o necesidad a la que darle solución**, y estos **están por todas partes**. Así que trata de buscar problemas o necesidades en tu vida diaria y realiza una lista. Una vez que tengas una lista exhaustiva, ya puedes empezar a pensar en **cómo puedes resolverlos**.
+FilmStar es una aplicación web desarrollada con el propósito de revolucionar la forma en que los usuarios interactúan con películas. Inspirada por las deficiencias observadas en plataformas populares como Filmaffinity, FilmStar introduce varias características únicas que no solo mejoran la experiencia del usuario sino que también añaden un nivel de exclusividad que es raro en el mercado actual. 
 
-En este apartado el alumno debe hacer una breve descripción del proyecto que vaya a realizar. Esta descripción no será ua descripción detallada, será una presentación general con no más de 10 líneas.
 
-## Definir el objetivo de la aplicación
-**Tener una gran idea** o encontrar un punto del mercado al que no se esté dando un producto o servicio es el punto de partida en cada nuevo proyecto. Antes de comenzar debes **definir claramente el propósito y la misión de la aplicación web**:
-
-- **¿Qué va a hacer la aplicación?**
-- **¿Cuál es su atractivo principal?** 
-- **¿Qué problema concreto va a resolver?** 
-- **¿Qué necesidad va a cubrir?**
+El objetivo principal de FilmStar es proporcionar una plataforma cerrada y exclusiva para amantes del cine, donde puedan descubrir, valorar, y comentar películas. Al implementar un sistema de registro por invitación, FilmStar busca mantener un alto nivel de calidad en las valoraciones y comentarios, evitando así el ruido y las opiniones sin fundamento que afectan a otras plataformas abiertas. Además, FilmStar incorpora un diseño moderno y responsivo, con soporte para modos oscuro y claro, mejorando la experiencia de usuario en diferentes entornos de iluminación.
 
 ## Estructura del Proyecto
 
@@ -41,7 +20,25 @@ En este apartado el alumno explicará el contenido del repositorio y de todas la
 Por lo anterior, un proyecto que contenga un Frontend en una tecnología o framework (por ejemplo Angular) y una API REST en otra tecnología o framework (Springboot, Express) deberá tener la siguiente estructura de directorios en el repositorio de entrega:
 
 - src-api
+  - src
+    - main
+      - java
+        - com.filmstar
+          - apps
+          - domain
+          - application
+          - infrastructure
+          - FilmstarApplication.java
 - src-frontend
+  - src
+    - assets
+    - components
+    - layouts
+    - loaders
+    - pages
+    - redux
+    - routes
+    - app.jsx
 - docs
 - README.md
 
