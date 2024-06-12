@@ -2,7 +2,7 @@
 
 #### Curso Escolar 2023-2024
 #### Autor: [Pablo Calvo Jiménez](https://github.com/PabloCalvo03)
-#### Tutor: [Antonio Gabriel Gonzalez Casado](https://github.com/antonio-gabriel-gonzalez-casado)
+#### Tutor: [Antonio Gabriel Gonzalez Casado](https://github.com/antonio-gabriel-gonzalez-casado) - [Juan Pablo Dominguez Mayo](https://github.com/profeInformatica101)
 #### Fecha de Inicio: 15-03-2024
 #### Fecha de Finalización: 12-06-2024
 
