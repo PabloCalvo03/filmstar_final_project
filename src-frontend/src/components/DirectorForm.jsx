@@ -26,14 +26,14 @@ const DirectorForm = () => {
 
         if (!directorData.name) {
             newErrors.name = 'Name is required';
-        } else if (directorData.name.length > 50) {
-            newErrors.name = 'Name cannot exceed 50 characters';
+        } else if (directorData.name.length > 30) {
+            newErrors.name = 'Name cannot exceed 30 characters';
         }
 
         if (!directorData.surname) {
             newErrors.surname = 'Surname is required';
-        } else if (directorData.surname.length > 50) {
-            newErrors.surname = 'Surname cannot exceed 50 characters';
+        } else if (directorData.surname.length > 30) {
+            newErrors.surname = 'Surname cannot exceed 30 characters';
         }
 
         setErrors(newErrors);
