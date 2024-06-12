@@ -73,3 +73,9 @@ El `Makefile` es lo que uso para hacer make... es para poner alias a los comando
 4. Una vez en el directorio del proyecto, navega hacia src-api y ejecuta el comando `docker compose up --build`.
 
 5. Con el contenedor corriendo, habra fallado ya que no existe base de datos, deberas hacer `docker exec -i src-api-mysqldb-1 mysql -u root -proot filmstar_db < ./fixtures/fixture.sql`.
+
+6. Tras esto lanza de nuevo `docker compose up --build` y con esto ya tendríamos el backend corriendo.
+
+7. Ahora ve hacia atras y metete en src-frontend y igual, haz `docker compose up --build`.
+
+8. Y ya estaría todo listo para probar!
