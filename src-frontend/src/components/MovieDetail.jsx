@@ -10,6 +10,7 @@ const MovieDetail = () => {
   const [newReview, setNewReview] = useState("");
   const [userRating, setUserRating] = useState(0);
   const [averageRating, setAverageRating] = useState(0);
+  const [error, setError] = useState('');
 
   useEffect(() => {
     if (!user) return;
@@ -35,7 +36,14 @@ const MovieDetail = () => {
 
   const handleReviewSubmit = (event) => {
     event.preventDefault();
-    if (!newReview.trim()) return;
+    if (!newReview.trim()) {
+      setError('The review cannot be empty.');
+      return;
+    }
+    if (newReview.length > 500) {
+      setError('The review must be less than 500 characters.');
+      return;
+    }
 
     const review = {
       comment: newReview,
@@ -61,6 +69,7 @@ const MovieDetail = () => {
       .catch((error) => console.error("Error adding review:", error));
 
     setNewReview("");
+    setError('');
   };
 
   const handleRatingSubmit = (event) => {
@@ -134,8 +143,7 @@ const MovieDetail = () => {
         <div className="bg-white dark:bg-gray-800 shadow-md rounded-lg overflow-hidden">
           <div className="p-4">
             <div className="flex flex-col items-center"> {/* Modificado aquí */}
-              <div className="flex-shrink-0 w-40 h-60 rounded-lg overflow-hidden
-shadow-2xl">
+              <div className="flex-shrink-0 w-40 h-60 rounded-lg overflow-hidden shadow-2xl">
                 <img
                   src={movie.posterImg}
                   alt={movie.title}
@@ -143,9 +151,9 @@ shadow-2xl">
                 />
               </div>
               <div className="flex items-center mt-4">
-            <span className="mr-1">{renderRatingStars(averageRating)}</span>
-            <span className="text-gray-700 dark:text-gray-300">({Math.round(averageRating)})</span>
-          </div>
+                <span className="mr-1">{renderRatingStars(averageRating)}</span>
+                <span className="text-gray-700 dark:text-gray-300">({Math.round(averageRating)})</span>
+              </div>
             </div>
             <br />
             <div>
@@ -174,7 +182,9 @@ shadow-2xl">
                 placeholder="Write your review..."
                 value={newReview}
                 onChange={(e) => setNewReview(e.target.value)}
+                maxLength={500}
               />
+              {error && <p className="text-red-500 mt-2">{error}</p>}
             </div>
             <button
               type="submit"
@@ -190,7 +200,7 @@ shadow-2xl">
             reviews.map((review) => (
               <div key={review.id} className="mb-4">
                 <div className="bg-gray-100 dark:bg-gray-700 p-4 rounded-lg shadow-sm">
-                  <p className="text-gray-800 dark:text-gray-100">
+                  <p className="text-gray-800 dark:text-gray-100 break-words whitespace-normal">
                     <strong className="text-blue-600 dark:text-blue-400">{review.reviewer.username.value}</strong>: {review.comment}
                   </p>
                 </div>
@@ -204,16 +214,16 @@ shadow-2xl">
           <h3 className="text-xl font-semibold mb-4 text-gray-700 dark:text-white">Add a Rating</h3>
           <form onSubmit={handleRatingSubmit}>
             <div className="mb-4">
-            <input
-              type="number"
-              min="0"
-              max="10"
-              step="0.1"
-              value={isNaN(userRating) ? '' : userRating} // Si userRating es NaN, establecer cadena vacía
-              onChange={(e) => setUserRating(parseFloat(e.target.value))}
-              className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200"
-              placeholder="Enter your rating (0-10)"
-            />
+              <input
+                type="number"
+                min="0"
+                max="10"
+                step="0.1"
+                value={isNaN(userRating) ? '' : userRating} // Si userRating es NaN, establecer cadena vacía
+                onChange={(e) => setUserRating(parseFloat(e.target.value))}
+                className="w-full p-3 border border-gray-300 dark:border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 dark:bg-gray-700 dark:text-gray-200"
+                placeholder="Enter your rating (0-10)"
+              />
             </div>
             <button
               type="submit"
