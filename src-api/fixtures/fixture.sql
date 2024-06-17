@@ -146,7 +146,7 @@ VALUES ('076707b8-1a0d-44f2-98ec-fa2fdb3cd864', 'Goodfellas', 'The story of Henr
 
 -- Insertar película 13
 INSERT INTO movies (id, title, overview, poster_img, director_id, status, year)
-VALUES ('076707b8-1a0d-44f2-98ec-fa2fdb3cd864', 'The Silence of the Lambs', 'A young F.B.I. cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer, a madman who skins his victims.', 'https://www.themoviedb.org/t/p/w1280/uS9m8OBk1A8eM9I042bx8XXpqAq.jpg', 'd1f2c598-ef47-11ec-8ea0-0242ac120002', 'AVAILABLE', 1991);
+VALUES ('076707b8-1a0d-44f2-98ec-fa2fdb3cd861', 'The Silence of the Lambs', 'A young F.B.I. cadet must receive the help of an incarcerated and manipulative cannibal killer to help catch another serial killer, a madman who skins his victims.', 'https://www.themoviedb.org/t/p/w1280/uS9m8OBk1A8eM9I042bx8XXpqAq.jpg', 'd1f2c598-ef47-11ec-8ea0-0242ac120002', 'AVAILABLE', 1991);
 
 -- Insertar película 14
 INSERT INTO movies (id, title, overview, poster_img, director_id, status, year)
