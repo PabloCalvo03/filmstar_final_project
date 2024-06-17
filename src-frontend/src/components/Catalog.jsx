@@ -110,13 +110,13 @@ const Main = () => {
     if (!isSearching && currentPage > 0) {
       fetchMovies(currentPage);
     }
-  }, [currentPage, isSearching, searchQuery]); // Añadir searchQuery como dependencia
+  }, [currentPage, isSearching, searchQuery]); 
 
   return (
     <div className="py-2">
       <h1 className="text-3xl font-[600] dark:text-white">Explore</h1>
       <br />
-      <SearchBar by="title" setMovies={setMovies} fetchSearch={fetchSearch} handleSearch={handleSearch}></SearchBar> {/* Pasar handleSearch aquí */}
+      <SearchBar by="title" setMovies={setMovies} fetchSearch={fetchSearch} handleSearch={handleSearch}></SearchBar>
       <br />
       {isLoading && movies.length === 0 ? (
         <p>Loading movies...</p>

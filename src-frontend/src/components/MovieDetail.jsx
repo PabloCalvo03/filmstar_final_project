@@ -40,8 +40,8 @@ const MovieDetail = () => {
       setError('The review cannot be empty.');
       return;
     }
-    if (newReview.length > 500) {
-      setError('The review must be less than 500 characters.');
+    if (newReview.length > 255) {
+      setError('The review must be less than 255 characters.');
       return;
     }
 
@@ -182,7 +182,7 @@ const MovieDetail = () => {
                 placeholder="Write your review..."
                 value={newReview}
                 onChange={(e) => setNewReview(e.target.value)}
-                maxLength={500}
+                maxLength={255}
               />
               {error && <p className="text-red-500 mt-2">{error}</p>}
             </div>
