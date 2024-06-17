@@ -118,8 +118,8 @@ public class Review {
 	 * @throws IllegalArgumentException if the comment exceeds 500 characters
 	 */
 	private void ensureLengthIsValid(String comment) throws IllegalArgumentException {
-		if (comment.length() > 500) {
-			throw new IllegalArgumentException("Comment must not exceed 500 characters");
+		if (comment.length() > 255) {
+			throw new IllegalArgumentException("Comment must not exceed 200 characters");
 		}
 	}
 }
